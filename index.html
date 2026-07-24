@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A focused calendar for conference deadlines and selected journals.">
+  <title>Venue Calendar</title>
+  <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=18">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div class="hero-title">
+        <p class="eyebrow">CONFERENCE &amp; JOURNAL TRACKER</p>
+        <h1>Venue <span>Calendar</span></h1>
+      </div>
+      <aside class="urgency-legend" aria-label="Deadline urgency color legend">
+        <p>Deadline colors</p>
+        <div class="legend-items">
+          <span><i style="--legend-color:rgb(143 29 44)"></i>0 days</span>
+          <span><i style="--legend-color:rgb(255 0 0)"></i>3 days</span>
+          <span><i style="--legend-color:rgb(194 88 19)"></i>7 days</span>
+          <span><i style="--legend-color:rgb(241 105 16)"></i>14 days</span>
+          <span><i style="--legend-color:rgb(255 212 0)"></i>30 days</span>
+          <span><i style="--legend-color:rgb(198 255 0)"></i>38 days</span>
+          <span><i style="--legend-color:rgb(118 255 3)"></i>45 days</span>
+          <span><i style="--legend-color:rgb(22 143 234)"></i>60+ days</span>
+          <span><i style="--legend-color:rgb(168 173 170)"></i>Not announced</span>
+        </div>
+      </aside>
+    </header>
+
+    <section class="toolbar" aria-label="View and filters">
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-view="conference" role="tab">Conferences <span id="conference-count"></span></button>
+        <button class="tab" data-view="journal" role="tab">Journals <span id="journal-count"></span></button>
+      </div>
+      <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search venues…"></label>
+      <div class="rank-filter" aria-label="Filter by CCF rank">
+        <button class="rank-option active" data-rank="all" aria-pressed="true">All</button>
+        <button class="rank-option A" data-rank="A" aria-pressed="false">A</button>
+        <button class="rank-option B" data-rank="B" aria-pressed="false">B</button>
+        <button class="rank-option C" data-rank="C" aria-pressed="false">C</button>
+        <button class="rank-option N" data-rank="N" aria-pressed="false">N</button>
+      </div>
+    </section>
+
+    <section id="cards" class="cards" aria-live="polite"></section>
+    <div id="empty" class="empty hidden"><strong>No matches</strong><span>Try another search term or filter.</span></div>
+
+    <footer>
+      <p>Venue Calendar · Data from official venue websites</p>
+      <p id="updated"></p>
+    </footer>
+  </main>
+  <script src="data/conferences.js?v=5"></script>
+  <script src="data/journals.js?v=4"></script>
+  <script src="app.js?v=16"></script>
+</body>
+</html>
