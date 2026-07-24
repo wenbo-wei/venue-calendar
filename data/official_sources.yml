@@ -1,0 +1,168 @@
+- slug: aaai
+  title: AAAI
+  description: AAAI Conference on Artificial Intelligence
+  rank: A
+  year_rule: annual_next
+  aliases: [AAAI]
+  series_url: https://aaai.org/conference/aaai/
+  trusted_hosts: [aaai.org]
+  url: https://aaai.org/conference/aaai/aaai-{yy}/
+  known:
+    2027:
+      abstract_deadline: '2026-07-21 23:59:59'
+      deadline: '2026-07-28 23:59:59'
+      timezone: UTC-12
+- slug: mm
+  title: ACM MM
+  description: ACM International Conference on Multimedia
+  rank: A
+  year_rule: annual_next
+  aliases: [ACM MM, ACM Multimedia]
+  series_url: https://www.acmmm.org/
+  location_sources:
+    - url: https://www.acmmm.org/
+      precision: locality
+  trusted_hosts: [acmmm.org]
+  url: https://{year}.acmmm.org/
+- slug: bmvc
+  title: BMVC
+  description: British Machine Vision Conference
+  rank: C
+  year_rule: annual_next
+  aliases: [BMVC, British Machine Vision Conference]
+  series_url: https://www.bmva.org/bmvc
+  trusted_hosts: [bmva.org]
+  url: https://bmvc{year}.bmva.org/
+- slug: cvpr
+  title: CVPR
+  description: IEEE/CVF Conference on Computer Vision and Pattern Recognition
+  rank: A
+  year_rule: annual_next
+  aliases: [CVPR, Conference on Computer Vision and Pattern Recognition]
+  series_url: https://cvpr.thecvf.com/
+  trusted_hosts: [thecvf.com]
+  url: https://cvpr.thecvf.com/Conferences/{year}
+- slug: ecai
+  title: ECAI
+  description: European Conference on Artificial Intelligence
+  rank: B
+  year_rule: annual_next
+  aliases: [ECAI, European Conference on Artificial Intelligence]
+  series_url: https://www.eurai.org/ecai
+  trusted_hosts: [eurai.org]
+  url: https://ecai{year}.org/
+- slug: eccv
+  title: ECCV
+  description: European Conference on Computer Vision
+  rank: B
+  year_rule: even_next
+  aliases: [ECCV, European Conference on Computer Vision]
+  series_url: https://eccv.ecva.net/
+  trusted_hosts: [ecva.net]
+  url: https://eccv.ecva.net/
+- slug: icassp
+  title: ICASSP
+  description: IEEE International Conference on Acoustics, Speech, and Signal Processing
+  rank: B
+  year_rule: annual_next
+  aliases: [ICASSP, International Conference on Acoustics Speech and Signal Processing]
+  series_url: https://signalprocessingsociety.org/events/conferences
+  discovery_urls:
+    - https://signalprocessingsociety.org/events/attend-an-event
+  trusted_hosts: [signalprocessingsociety.org, ieeeicassp.org]
+  url: https://{year}.ieeeicassp.org/
+  known:
+    2027:
+      deadline: '2026-09-16 23:59:59'
+      timezone: UTC-12
+- slug: iccv
+  title: ICCV
+  description: IEEE/CVF International Conference on Computer Vision
+  rank: A
+  year_rule: odd_next
+  aliases: [ICCV, International Conference on Computer Vision]
+  series_url: https://iccv.thecvf.com/
+  trusted_hosts: [thecvf.com]
+  url: https://iccv.thecvf.com/Conferences/{year}
+- slug: icip
+  title: ICIP
+  description: IEEE International Conference on Image Processing
+  rank: C
+  year_rule: annual_next
+  aliases: [ICIP, International Conference on Image Processing]
+  series_url: https://signalprocessingsociety.org/events/conferences
+  discovery_urls:
+    - https://signalprocessingsociety.org/events/attend-an-event
+  trusted_hosts: [signalprocessingsociety.org, ieeeicip.org]
+  url: https://{year}.ieeeicip.org/
+- slug: iclr
+  title: ICLR
+  description: International Conference on Learning Representations
+  rank: A
+  year_rule: annual_next
+  aliases: [ICLR, International Conference on Learning Representations]
+  series_url: https://iclr.cc/
+  location_sources:
+    - url: https://iclr.cc/Conferences/FutureMeetings
+      precision: region
+  trusted_hosts: [iclr.cc]
+  url: https://iclr.cc/Conferences/{year}
+- slug: icme
+  title: ICME
+  description: IEEE International Conference on Multimedia and Expo
+  rank: B
+  year_rule: annual_next
+  aliases: [ICME, International Conference on Multimedia and Expo]
+  series_url: https://signalprocessingsociety.org/events/conferences
+  discovery_urls:
+    - https://signalprocessingsociety.org/events/attend-an-event
+  trusted_hosts: [signalprocessingsociety.org, ieeeicme.org]
+  url: https://{year}.ieeeicme.org/
+- slug: icml
+  title: ICML
+  description: International Conference on Machine Learning
+  rank: A
+  year_rule: annual_next
+  aliases: [ICML, International Conference on Machine Learning]
+  series_url: https://icml.cc/
+  location_sources:
+    - url: https://icml.cc/Conferences/FutureMeetings
+      precision: region
+  trusted_hosts: [icml.cc]
+  url: https://icml.cc/Conferences/{year}
+- slug: ijcai
+  title: IJCAI
+  description: International Joint Conference on Artificial Intelligence
+  rank: B
+  year_rule: annual_next
+  aliases: [IJCAI, International Joint Conference on Artificial Intelligence]
+  series_url: https://www.ijcai.org/
+  trusted_hosts: [ijcai.org]
+  url: https://{year}.ijcai.org/
+- slug: nips
+  title: NeurIPS
+  description: Conference on Neural Information Processing Systems
+  rank: A
+  year_rule: annual_next
+  aliases: [NeurIPS, NIPS, Neural Information Processing Systems]
+  series_url: https://neurips.cc/
+  location_sources:
+    - url: https://neurips.cc/Conferences/FutureMeetings
+      precision: region
+  trusted_hosts: [neurips.cc]
+  url: https://neurips.cc/Conferences/{year}
+- slug: wacv
+  title: WACV
+  description: IEEE/CVF Winter Conference on Applications of Computer Vision
+  rank: N
+  year_rule: annual_next
+  aliases: [WACV, Winter Conference on Applications of Computer Vision]
+  series_url: https://wacv.thecvf.com/
+  location_layout: heading_before_date
+  trusted_hosts: [thecvf.com]
+  url: https://wacv.thecvf.com/Conferences/{year}
+  known:
+    2027:
+      abstract_deadline: '2026-08-21 23:59:00'
+      deadline: '2026-08-28 23:59:59'
+      timezone: UTC-12
