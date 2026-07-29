@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-07-24T06:57:54.225926+00:00",
+  "updated_at": "2026-07-29T03:44:36.025969+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -274,8 +274,8 @@ window.AI_CONFERENCES = {
           "year": 2027,
           "id": "iclr27",
           "link": "https://iclr.cc/",
-          "link_kind": "series",
-          "official_page_announced": false,
+          "link_kind": "edition",
+          "official_page_announced": true,
           "timeline": [],
           "timezone": "UTC-12",
           "date": "TBD",
@@ -285,7 +285,7 @@ window.AI_CONFERENCES = {
         }
       ],
       "latest_link": "https://iclr.cc/",
-      "official_url": null,
+      "official_url": "https://iclr.cc/",
       "series_url": "https://iclr.cc/",
       "next_year": 2027,
       "source_category": "official",
