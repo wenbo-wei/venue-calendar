@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-07-29T09:13:04.523624+00:00",
+  "updated_at": "2026-07-29T19:47:14.339032+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -273,7 +273,7 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "iclr27",
-          "link": "https://iclr.cc/",
+          "link": "https://iclr.cc/Conferences/2027",
           "link_kind": "edition",
           "official_page_announced": true,
           "timeline": [],
@@ -281,11 +281,11 @@ window.AI_CONFERENCES = {
           "date": "TBD",
           "place": "Venue information will be posted here",
           "place_status": "verified",
-          "location_source_url": "https://iclr.cc/"
+          "location_source_url": "https://iclr.cc/Conferences/2027"
         }
       ],
-      "latest_link": "https://iclr.cc/",
-      "official_url": "https://iclr.cc/",
+      "latest_link": "https://iclr.cc/Conferences/2027",
+      "official_url": "https://iclr.cc/Conferences/2027",
       "series_url": "https://iclr.cc/",
       "next_year": 2027,
       "source_category": "official",
