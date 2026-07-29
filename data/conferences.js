@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-07-29T03:44:36.025969+00:00",
+  "updated_at": "2026-07-29T09:13:04.523624+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -279,9 +279,9 @@ window.AI_CONFERENCES = {
           "timeline": [],
           "timezone": "UTC-12",
           "date": "TBD",
-          "place": "West Coast North America",
+          "place": "Venue information will be posted here",
           "place_status": "verified",
-          "location_source_url": "https://iclr.cc/Conferences/FutureMeetings"
+          "location_source_url": "https://iclr.cc/"
         }
       ],
       "latest_link": "https://iclr.cc/",

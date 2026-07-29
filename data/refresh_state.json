@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-07-29T03:44:36.025969+00:00",
+  "checked_at": "2026-07-29T09:13:04.523624+00:00",
   "changed": true,
   "venues": {
     "aaai": {
@@ -11,7 +11,7 @@
       "error": null,
       "discovered_from": "https://aaai.org/conference/aaai/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-07-29T03:44:36.025969+00:00",
+      "verified_at": "2026-07-29T09:13:04.523624+00:00",
       "deadlines": {
         "abstract_deadline": "2026-07-21 23:59:59",
         "deadline": "2026-07-28 23:59:59"
@@ -24,7 +24,7 @@
         "precision": "locality",
         "evidence": "February 16 – February 23, 2027 | Montréal, Canada",
         "source_url": "https://aaai.org/conference/aaai/aaai-27/",
-        "verified_at": "2026-07-29T03:44:36.025969+00:00"
+        "verified_at": "2026-07-29T09:13:04.523624+00:00"
       },
       "pending_location": null
     },
@@ -47,7 +47,7 @@
         "precision": "locality",
         "evidence": "ACM MM 2027 will be in Hong Kong.",
         "source_url": "https://www.acmmm.org/",
-        "verified_at": "2026-07-29T03:44:36.025969+00:00"
+        "verified_at": "2026-07-29T09:13:04.523624+00:00"
       },
       "pending_location": null
     },
@@ -120,7 +120,7 @@
       "error": null,
       "discovered_from": "https://signalprocessingsociety.org/events/conferences",
       "discovery_method": "last_verified",
-      "verified_at": "2026-07-29T03:44:36.025969+00:00",
+      "verified_at": "2026-07-29T09:13:04.523624+00:00",
       "deadlines": {
         "deadline": "2026-09-16 23:59:59"
       },
@@ -132,7 +132,7 @@
         "precision": "locality",
         "evidence": "16-21 May 2027, Toronto, Canada",
         "source_url": "https://2027.ieeeicassp.org/",
-        "verified_at": "2026-07-29T03:44:36.025969+00:00"
+        "verified_at": "2026-07-29T09:13:04.523624+00:00"
       },
       "pending_location": null
     },
@@ -160,7 +160,7 @@
       "error": null,
       "discovered_from": "https://signalprocessingsociety.org/events/conferences",
       "discovery_method": "last_verified",
-      "verified_at": "2026-07-29T03:44:36.025969+00:00",
+      "verified_at": "2026-07-29T09:13:04.523624+00:00",
       "deadlines": {},
       "timezone": "UTC-12",
       "location": {
@@ -170,7 +170,7 @@
         "precision": "locality",
         "evidence": "29 November – 3 December 2027, Singapore",
         "source_url": "https://2027.ieeeicip.org/",
-        "verified_at": "2026-07-29T03:44:36.025969+00:00"
+        "verified_at": "2026-07-29T09:13:04.523624+00:00"
       },
       "pending_location": null
     },
@@ -182,29 +182,20 @@
       "status": "verified",
       "error": null,
       "discovered_from": "https://iclr.cc/",
-      "discovery_method": "official_hub_link",
-      "verified_at": "2026-07-29T03:44:36.025969+00:00",
+      "discovery_method": "last_verified",
+      "verified_at": "2026-07-29T09:13:04.523624+00:00",
       "deadlines": {},
       "timezone": "UTC-12",
       "location": {
-        "display": "West Coast North America",
-        "method": "official_future_meeting",
-        "confidence": "high",
-        "precision": "region",
-        "evidence": "ICLR 2027: West Coast North America",
-        "source_url": "https://iclr.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-07-24T06:57:54.225926+00:00"
-      },
-      "pending_location": {
         "display": "Venue information will be posted here",
         "method": "labelled_location",
         "confidence": "high",
         "precision": "locality",
         "evidence": "Venue: Venue information will be posted here",
         "source_url": "https://iclr.cc/",
-        "verified_at": "2026-07-29T03:44:36.025969+00:00",
-        "observations": 1
-      }
+        "verified_at": "2026-07-29T09:13:04.523624+00:00"
+      },
+      "pending_location": null
     },
     "icme": {
       "url": "https://signalprocessingsociety.org/events/conferences",
@@ -240,7 +231,7 @@
         "precision": "region",
         "evidence": "2027 -- South America",
         "source_url": "https://icml.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-07-29T03:44:36.025969+00:00"
+        "verified_at": "2026-07-29T09:13:04.523624+00:00"
       },
       "pending_location": null
     },
@@ -278,7 +269,7 @@
         "precision": "region",
         "evidence": "2027 -- Europe",
         "source_url": "https://neurips.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-07-29T03:44:36.025969+00:00"
+        "verified_at": "2026-07-29T09:13:04.523624+00:00"
       },
       "pending_location": null
     },
@@ -291,7 +282,7 @@
       "error": null,
       "discovered_from": "https://wacv.thecvf.com/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-07-29T03:44:36.025969+00:00",
+      "verified_at": "2026-07-29T09:13:04.523624+00:00",
       "deadlines": {
         "abstract_deadline": "2026-08-21 23:59:00",
         "deadline": "2026-08-28 23:59:59"
@@ -304,7 +295,7 @@
         "precision": "locality",
         "evidence": "Disney Springs, Buena Vista, FL | Monday, Jan 4 through Friday, Jan 8, 2027",
         "source_url": "https://wacv.thecvf.com/",
-        "verified_at": "2026-07-29T03:44:36.025969+00:00"
+        "verified_at": "2026-07-29T09:13:04.523624+00:00"
       },
       "pending_location": null
     }
