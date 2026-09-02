@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-07-29T19:47:14.339032+00:00",
+  "updated_at": "2026-09-02T21:06:31.860263+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -101,19 +101,19 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "cvpr27",
-          "link": "https://cvpr.thecvf.com/",
-          "link_kind": "series",
-          "official_page_announced": false,
+          "link": "https://cvpr.thecvf.com/Conferences/2027",
+          "link_kind": "edition",
+          "official_page_announced": true,
           "timeline": [],
           "timezone": "UTC-12",
           "date": "TBD",
           "place": "TBD",
-          "place_status": "not_announced",
+          "place_status": "not_detected",
           "location_source_url": null
         }
       ],
-      "latest_link": "https://cvpr.thecvf.com/",
-      "official_url": null,
+      "latest_link": "https://cvpr.thecvf.com/Conferences/2027",
+      "official_url": "https://cvpr.thecvf.com/Conferences/2027",
       "series_url": "https://cvpr.thecvf.com/",
       "next_year": 2027,
       "source_category": "official",
