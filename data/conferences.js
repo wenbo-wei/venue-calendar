@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-09-02T21:06:31.860263+00:00",
+  "updated_at": "2026-09-16T11:43:17.945146+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -185,7 +185,7 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "icassp27",
-          "link": "https://2027.ieeeicassp.org/",
+          "link": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp",
           "link_kind": "edition",
           "official_page_announced": true,
           "timeline": [
@@ -197,11 +197,11 @@ window.AI_CONFERENCES = {
           "date": "TBD",
           "place": "Toronto, Canada",
           "place_status": "verified",
-          "location_source_url": "https://2027.ieeeicassp.org/"
+          "location_source_url": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp"
         }
       ],
-      "latest_link": "https://2027.ieeeicassp.org/",
-      "official_url": "https://2027.ieeeicassp.org/",
+      "latest_link": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp",
+      "official_url": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp",
       "series_url": "https://signalprocessingsociety.org/events/conferences",
       "next_year": 2027,
       "source_category": "official",
