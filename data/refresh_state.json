@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-16T11:43:17.945146+00:00",
+  "checked_at": "2026-09-20T16:11:59.698970+00:00",
   "changed": true,
   "venues": {
     "aaai": {
@@ -11,7 +11,7 @@
       "error": null,
       "discovered_from": "https://aaai.org/conference/aaai/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-16T11:43:17.945146+00:00",
+      "verified_at": "2026-09-20T16:11:59.698970+00:00",
       "deadlines": {
         "abstract_deadline": "2026-07-21 23:59:59",
         "deadline": "2026-07-28 23:59:59"
@@ -24,7 +24,7 @@
         "precision": "locality",
         "evidence": "February 16 – February 23, 2027 | Montréal, Canada",
         "source_url": "https://aaai.org/conference/aaai/aaai-27/",
-        "verified_at": "2026-09-16T11:43:17.945146+00:00"
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
       },
       "pending_location": null
     },
@@ -47,7 +47,7 @@
         "precision": "locality",
         "evidence": "ACM MM 2027 will be in Hong Kong.",
         "source_url": "https://www.acmmm.org/",
-        "verified_at": "2026-09-16T11:43:17.945146+00:00"
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
       },
       "pending_location": null
     },
@@ -75,7 +75,7 @@
       "error": null,
       "discovered_from": "https://cvpr.thecvf.com/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-16T11:43:17.945146+00:00",
+      "verified_at": "2026-09-20T16:11:59.698970+00:00",
       "deadlines": {},
       "timezone": "UTC-12",
       "location": null,
@@ -117,10 +117,10 @@
       "series_url": "https://signalprocessingsociety.org/events/conferences",
       "year": 2027,
       "status": "verified",
-      "error": "https://2027.ieeeicassp.org/: HTTP 500",
+      "error": null,
       "discovered_from": "https://signalprocessingsociety.org/sitemap.xml",
-      "discovery_method": "official_sitemap",
-      "verified_at": "2026-09-16T11:43:17.945146+00:00",
+      "discovery_method": "last_verified",
+      "verified_at": "2026-09-20T16:11:59.698970+00:00",
       "deadlines": {
         "deadline": "2026-09-16 23:59:59"
       },
@@ -132,23 +132,31 @@
         "precision": "locality",
         "evidence": "Location: Toronto, Canada",
         "source_url": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp",
-        "verified_at": "2026-09-16T11:43:17.945146+00:00"
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
       },
       "pending_location": null
     },
     "iccv": {
-      "url": "https://iccv.thecvf.com/",
-      "official_url": null,
+      "url": "https://iccv.thecvf.com/Conferences/2027",
+      "official_url": "https://iccv.thecvf.com/Conferences/2027",
       "series_url": "https://iccv.thecvf.com/",
       "year": 2027,
-      "status": "awaiting_official_page",
-      "error": "https://iccv.thecvf.com/Conferences/2027: HTTP 404",
-      "discovered_from": null,
-      "discovery_method": null,
-      "verified_at": null,
+      "status": "verified",
+      "error": null,
+      "discovered_from": "https://iccv.thecvf.com/",
+      "discovery_method": "configured_pattern",
+      "verified_at": "2026-09-20T16:11:59.698970+00:00",
       "deadlines": {},
       "timezone": "UTC-12",
-      "location": null,
+      "location": {
+        "display": "Hong",
+        "method": "held_in_sentence",
+        "confidence": "high",
+        "precision": "locality",
+        "evidence": "ICCV 2027 will be held at the Venue Coming Soon... in Hong",
+        "source_url": "https://iccv.thecvf.com/Conferences/2027",
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
+      },
       "pending_location": null
     },
     "icip": {
@@ -160,7 +168,7 @@
       "error": null,
       "discovered_from": "https://signalprocessingsociety.org/events/conferences",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-16T11:43:17.945146+00:00",
+      "verified_at": "2026-09-20T16:11:59.698970+00:00",
       "deadlines": {},
       "timezone": "UTC-12",
       "location": {
@@ -170,7 +178,7 @@
         "precision": "locality",
         "evidence": "29 November – 3 December 2027, Singapore",
         "source_url": "https://2027.ieeeicip.org/",
-        "verified_at": "2026-09-16T11:43:17.945146+00:00"
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
       },
       "pending_location": null
     },
@@ -183,7 +191,7 @@
       "error": null,
       "discovered_from": "https://iclr.cc/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-16T11:43:17.945146+00:00",
+      "verified_at": "2026-09-20T16:11:59.698970+00:00",
       "deadlines": {},
       "timezone": "UTC-12",
       "location": {
@@ -193,7 +201,7 @@
         "precision": "locality",
         "evidence": "Venue: Venue information will be posted here",
         "source_url": "https://iclr.cc/Conferences/2027",
-        "verified_at": "2026-09-16T11:43:17.945146+00:00"
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
       },
       "pending_location": null
     },
@@ -231,7 +239,7 @@
         "precision": "region",
         "evidence": "2027 -- South America",
         "source_url": "https://icml.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-09-16T11:43:17.945146+00:00"
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
       },
       "pending_location": null
     },
@@ -269,7 +277,7 @@
         "precision": "region",
         "evidence": "2027 -- Europe",
         "source_url": "https://neurips.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-09-16T11:43:17.945146+00:00"
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
       },
       "pending_location": null
     },
@@ -282,7 +290,7 @@
       "error": null,
       "discovered_from": "https://wacv.thecvf.com/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-16T11:43:17.945146+00:00",
+      "verified_at": "2026-09-20T16:11:59.698970+00:00",
       "deadlines": {
         "abstract_deadline": "2026-08-21 23:59:00",
         "deadline": "2026-08-28 23:59:59"
@@ -295,7 +303,7 @@
         "precision": "locality",
         "evidence": "Disney Springs, Buena Vista, FL | Monday, Jan 4 through Friday, Jan 8, 2027",
         "source_url": "https://wacv.thecvf.com/",
-        "verified_at": "2026-09-16T11:43:17.945146+00:00"
+        "verified_at": "2026-09-20T16:11:59.698970+00:00"
       },
       "pending_location": null
     }

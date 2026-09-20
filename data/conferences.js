@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-09-16T11:43:17.945146+00:00",
+  "updated_at": "2026-09-20T16:11:59.698970+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -217,19 +217,19 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "iccv27",
-          "link": "https://iccv.thecvf.com/",
-          "link_kind": "series",
-          "official_page_announced": false,
+          "link": "https://iccv.thecvf.com/Conferences/2027",
+          "link_kind": "edition",
+          "official_page_announced": true,
           "timeline": [],
           "timezone": "UTC-12",
           "date": "TBD",
-          "place": "TBD",
-          "place_status": "not_announced",
-          "location_source_url": null
+          "place": "Hong",
+          "place_status": "verified",
+          "location_source_url": "https://iccv.thecvf.com/Conferences/2027"
         }
       ],
-      "latest_link": "https://iccv.thecvf.com/",
-      "official_url": null,
+      "latest_link": "https://iccv.thecvf.com/Conferences/2027",
+      "official_url": "https://iccv.thecvf.com/Conferences/2027",
       "series_url": "https://iccv.thecvf.com/",
       "next_year": 2027,
       "source_category": "official",
