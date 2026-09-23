@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-09-20T16:11:59.698970+00:00",
+  "updated_at": "2026-09-23T05:01:46.780050+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -17,11 +17,13 @@ window.AI_CONFERENCES = {
           "official_page_announced": true,
           "timeline": [
             {
-              "abstract_deadline": "2026-07-21 23:59:59",
-              "deadline": "2026-07-28 23:59:59"
+              "deadline": "2026-07-28 23:59:00",
+              "abstract_deadline": "2026-07-21 23:59:00"
             }
           ],
           "timezone": "UTC-12",
+          "deadline_source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
+          "deadline_status": "verified",
           "date": "TBD",
           "place": "Montréal, Canada",
           "place_status": "verified",
@@ -50,6 +52,8 @@ window.AI_CONFERENCES = {
           "official_page_announced": false,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
           "place": "Hong Kong",
           "place_status": "verified",
@@ -78,6 +82,8 @@ window.AI_CONFERENCES = {
           "official_page_announced": false,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
           "place": "TBD",
           "place_status": "not_announced",
@@ -104,12 +110,19 @@ window.AI_CONFERENCES = {
           "link": "https://cvpr.thecvf.com/Conferences/2027",
           "link_kind": "edition",
           "official_page_announced": true,
-          "timeline": [],
+          "timeline": [
+            {
+              "deadline": "2026-11-16 23:59:59",
+              "abstract_deadline": "2026-11-10 23:59:59"
+            }
+          ],
           "timezone": "UTC-12",
+          "deadline_source_url": "https://cvpr.thecvf.com/Conferences/2027/Dates",
+          "deadline_status": "retained",
           "date": "TBD",
-          "place": "TBD",
-          "place_status": "not_detected",
-          "location_source_url": null
+          "place": "Seattle WA",
+          "place_status": "verified",
+          "location_source_url": "https://cvpr.thecvf.com/Conferences/2027"
         }
       ],
       "latest_link": "https://cvpr.thecvf.com/Conferences/2027",
@@ -134,6 +147,8 @@ window.AI_CONFERENCES = {
           "official_page_announced": false,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
           "place": "TBD",
           "place_status": "not_announced",
@@ -162,6 +177,8 @@ window.AI_CONFERENCES = {
           "official_page_announced": false,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
           "place": "TBD",
           "place_status": "not_announced",
@@ -185,23 +202,25 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "icassp27",
-          "link": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp",
+          "link": "https://2027.ieeeicassp.org/",
           "link_kind": "edition",
           "official_page_announced": true,
           "timeline": [
             {
-              "deadline": "2026-09-16 23:59:59"
+              "deadline": "2026-09-23 23:59:59"
             }
           ],
           "timezone": "UTC-12",
+          "deadline_source_url": "https://2027.ieeeicassp.org/call-for-papers/",
+          "deadline_status": "verified",
           "date": "TBD",
           "place": "Toronto, Canada",
           "place_status": "verified",
-          "location_source_url": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp"
+          "location_source_url": "https://2027.ieeeicassp.org/"
         }
       ],
-      "latest_link": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp",
-      "official_url": "https://signalprocessingsociety.org/events/2027-ieee-international-conference-acoustics-speech-and-signal-processing-icassp",
+      "latest_link": "https://2027.ieeeicassp.org/",
+      "official_url": "https://2027.ieeeicassp.org/",
       "series_url": "https://signalprocessingsociety.org/events/conferences",
       "next_year": 2027,
       "source_category": "official",
@@ -222,8 +241,10 @@ window.AI_CONFERENCES = {
           "official_page_announced": true,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
-          "place": "Hong",
+          "place": "Hong Kong, CN",
           "place_status": "verified",
           "location_source_url": "https://iccv.thecvf.com/Conferences/2027"
         }
@@ -250,6 +271,8 @@ window.AI_CONFERENCES = {
           "official_page_announced": true,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
           "place": "Singapore",
           "place_status": "verified",
@@ -276,10 +299,17 @@ window.AI_CONFERENCES = {
           "link": "https://iclr.cc/Conferences/2027",
           "link_kind": "edition",
           "official_page_announced": true,
-          "timeline": [],
+          "timeline": [
+            {
+              "deadline": "2026-09-25 23:59:59",
+              "abstract_deadline": "2026-09-18 23:59:59"
+            }
+          ],
           "timezone": "UTC-12",
+          "deadline_source_url": "https://iclr.cc/Conferences/2027/CallForPapers",
+          "deadline_status": "verified",
           "date": "TBD",
-          "place": "Venue information will be posted here",
+          "place": "California",
           "place_status": "verified",
           "location_source_url": "https://iclr.cc/Conferences/2027"
         }
@@ -306,6 +336,8 @@ window.AI_CONFERENCES = {
           "official_page_announced": false,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
           "place": "TBD",
           "place_status": "not_announced",
@@ -334,6 +366,8 @@ window.AI_CONFERENCES = {
           "official_page_announced": false,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
           "place": "South America",
           "place_status": "verified",
@@ -362,10 +396,12 @@ window.AI_CONFERENCES = {
           "official_page_announced": false,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
-          "place": "TBD",
-          "place_status": "not_announced",
-          "location_source_url": null
+          "place": "Kyoto, Japan; Hengqin, China",
+          "place_status": "verified",
+          "location_source_url": "https://www.ijcai.org/"
         }
       ],
       "latest_link": "https://www.ijcai.org/",
@@ -390,6 +426,8 @@ window.AI_CONFERENCES = {
           "official_page_announced": false,
           "timeline": [],
           "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
           "date": "TBD",
           "place": "Europe",
           "place_status": "verified",
@@ -418,11 +456,13 @@ window.AI_CONFERENCES = {
           "official_page_announced": true,
           "timeline": [
             {
-              "abstract_deadline": "2026-08-21 23:59:00",
-              "deadline": "2026-08-28 23:59:59"
+              "deadline": "2026-08-28 23:59:59",
+              "abstract_deadline": "2026-08-21 23:59:59"
             }
           ],
           "timezone": "UTC-12",
+          "deadline_source_url": "https://wacv.thecvf.com/Conferences/2027/CallForPapers",
+          "deadline_status": "partial",
           "date": "TBD",
           "place": "Disney Springs, Buena Vista, FL",
           "place_status": "verified",

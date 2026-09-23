@@ -59,16 +59,22 @@
   els["journal-count"].textContent = allJournals.filter(item => !item.inactive).length;
   els.updated.textContent = `Official sites checked: ${new Date(window.AI_CONFERENCES.updated_at).toLocaleString()}`;
 
+  let snapshotLoadedAt = 0;
+  let snapshotLoading = false;
   function reloadLocalSnapshot() {
+    if (snapshotLoading || Date.now() - snapshotLoadedAt < 60000) return;
+    snapshotLoading = true;
     const script = document.createElement("script");
     script.src = `data/conferences.js?refresh=${Date.now()}`;
     script.onload = () => {
+      snapshotLoading = false;
+      snapshotLoadedAt = Date.now();
       els["conference-count"].textContent = window.AI_CONFERENCES.venues.length;
       els.updated.textContent = `Official sites checked: ${new Date(window.AI_CONFERENCES.updated_at).toLocaleString()}`;
       render();
       script.remove();
     };
-    script.onerror = () => script.remove();
+    script.onerror = () => { snapshotLoading = false; script.remove(); };
     document.head.appendChild(script);
   }
 
@@ -139,10 +145,13 @@
     const location = `<p class="location">${locationContent}</p>`;
     const officialHref = hasLocation && item.location_source_url ? item.location_source_url : item.link;
     const linkLabel = item.link_kind === "edition" ? "Official site ↗" : "Official series ↗";
+    const deadlineLink = item.next.date && item.deadline_source_url ? `<a href="${escapeHtml(item.deadline_source_url)}" target="_blank" rel="noreferrer">Deadline source ↗</a>` : "";
+    const deadlineLabel = item.next.date ? `${item.next.type} deadline · Local time` : "Submission deadline";
+    const countdownText = item.next.date ? countdown(item.next.date) : (item.official_page_announced ? "Deadline not yet verified" : "Deadline not announced");
     return `<article class="card ${item.past ? "inactive" : ""}${urgencyClass}"${urgencyStyle}>
       <div class="card-top"><div class="venue"><h2>${escapeHtml(item.title)} <small>${item.year}</small></h2><p>${escapeHtml(item.venueDescription)}</p>${location}</div></div>
-      <div class="deadline"><small>${escapeHtml(item.next.type)} deadline · Local time</small><div class="countdown"${countdownData}>${countdown(item.next.date)}</div><time class="deadline-date"${item.next.date ? ` datetime="${item.next.date.toISOString()}"` : ""}>${escapeHtml(dateText)}</time></div>
-      <div class="card-bottom"><span class="rank ${escapeHtml(item.ccfRank)}">CCF ${escapeHtml(item.ccfRank)}</span><div class="links"><a href="${escapeHtml(officialHref)}" target="_blank" rel="noreferrer">${linkLabel}</a></div></div>
+      <div class="deadline"><small>${escapeHtml(deadlineLabel)}</small><div class="countdown"${countdownData}>${escapeHtml(countdownText)}</div><time class="deadline-date"${item.next.date ? ` datetime="${item.next.date.toISOString()}"` : ""}>${escapeHtml(dateText)}</time></div>
+      <div class="card-bottom"><span class="rank ${escapeHtml(item.ccfRank)}">CCF ${escapeHtml(item.ccfRank)}</span><div class="links">${deadlineLink}<a href="${escapeHtml(officialHref)}" target="_blank" rel="noreferrer">${linkLabel}</a></div></div>
     </article>`;
   }
 
@@ -191,8 +200,11 @@
   }));
   els.search.addEventListener("input", event => { state.query = event.target.value.trim().toLowerCase(); render(); });
   requestAnimationFrame(render);
-  window.addEventListener("pageshow", render);
+  window.addEventListener("pageshow", () => { render(); reloadLocalSnapshot(); });
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") { render(); reloadLocalSnapshot(); }
+  });
   setInterval(updateCountdowns, 1000);
   setInterval(render, 60000);
-  setInterval(reloadLocalSnapshot, 21600000);
+  setInterval(reloadLocalSnapshot, 900000);
 })();

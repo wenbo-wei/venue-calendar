@@ -137,6 +137,9 @@
   year_rule: annual_next
   aliases: [IJCAI, International Joint Conference on Artificial Intelligence]
   series_url: https://www.ijcai.org/
+  location_sources:
+    - url: https://www.ijcai.org/
+      precision: locality
   trusted_hosts: [ijcai.org]
   url: https://{year}.ijcai.org/
 - slug: nips

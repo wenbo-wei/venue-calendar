@@ -19,7 +19,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Iterable
@@ -34,6 +34,7 @@ STATE = ROOT / "data" / "refresh_state.json"
 MAX_RESPONSE_BYTES = 4_000_000
 MAX_SITEMAPS = 6
 MAX_CANDIDATES = 12
+MAX_DEADLINE_PAGES = 4
 USER_AGENT = "VenueCalendar/2.0 (+https://github.com/wenbo-wei/venue-calendar)"
 
 MONTH_PATTERN = (
@@ -73,12 +74,13 @@ MONTHS = {
 }
 KEYWORDS = re.compile(
     r"(?:full\s+)?papers?\s+(?:submission|registration|deadline|due)|"
-    r"submission\s+deadline|abstracts?\s+(?:deadline|due)",
+    r"submissions?\s+deadline|abstracts?\s+(?:submission\s+)?(?:deadline|due)",
     re.I,
 )
 EXCLUDE = re.compile(
     r"workshop|tutorial|camera.ready|supplement|rebuttal|notification|demo|"
-    r"doctoral|challenge|\b(?:site\s+)?opens?\b",
+    r"doctoral|challenge|final\s+(?:paper|manuscript)|journal|special\s+track|"
+    r"\b(?:site\s+)?opens?\b",
     re.I,
 )
 SOFT_ERROR = re.compile(
@@ -96,7 +98,8 @@ NON_HOMEPAGE = re.compile(
     re.I,
 )
 LOCATION_PLACEHOLDER = re.compile(
-    r"^(?:TB[ACD]|coming soon|unknown|not available|"
+    r"^(?:(?:venue|location)\s+)?(?:TB[ACD]|coming soon|unknown|not available|"
+    r"information will be (?:posted|available|announced)(?: here| soon)?|"
     r"(?:location\s+)?not (?:yet )?(?:announced|confirmed|available)|"
     r"to be (?:announced|confirmed|determined|decided))[\s.!-]*$",
     re.I,
@@ -228,7 +231,10 @@ def fetch(url: str, timeout: int = 25) -> Page:
 
 
 def plain_text(document: str) -> str:
+    document = re.sub(r"<!--.*?-->", " ", document, flags=re.S)
     document = re.sub(r"<(script|style|template)\b[^>]*>.*?</\1>", " ", document, flags=re.I | re.S)
+    # Source-code wrapping is whitespace, not a visible line break (Hong\nKong).
+    document = re.sub(r"\s+", " ", document)
     document = re.sub(
         r"</?(?:p|div|li|tr|td|th|h\d|section|header|footer|main|article|br)\b[^>]*>",
         "\n",
@@ -468,7 +474,12 @@ def discovery_candidates(source: dict, year: int, prior: dict) -> tuple[list[Can
             if probable_homepage_reference(url, label, source, year):
                 candidates.append(Candidate(url, seed_page.final_url, "official_hub_link"))
         candidates.extend(discover_from_sitemaps(seed_page, source, year))
-    return unique_candidates(candidates), errors
+    result = unique_candidates(candidates)
+    # A society event listing must not pin the calendar after a dedicated
+    # edition website becomes available on the configured official host.
+    if normalized_host(pattern_candidate) != normalized_host(source["series_url"]):
+        result.sort(key=lambda item: normalized_host(item.url) == normalized_host(source["series_url"]))
+    return result, errors
 
 
 def verify_candidate(candidate: Candidate, source: dict, year: int) -> tuple[Page | None, str]:
@@ -494,36 +505,194 @@ def parse_date(match: re.Match[str]) -> str:
     return f"{year_number:04d}-{month_number:02d}-{int(day):02d} 23:59:59"
 
 
-def extract_deadlines(document: str, expected_year: int) -> dict[str, str]:
-    """Extract only main-paper dates with a close, unambiguous label."""
-    blocks = []
-    for match in re.finditer(
-        r"<(?P<tag>p|li|tr|dt|dd)\b[^>]*>(?P<body>.*?)</(?P=tag)>",
-        document,
-        re.I | re.S,
-    ):
-        value = html.unescape(re.sub(r"<[^>]+>", " ", match.group("body"))).replace("\xa0", " ")
-        value = re.sub(r"\s+", " ", value).strip()
-        if value:
-            blocks.append(value)
-    # Plain-text sources are supported only when label and date share one line.
-    blocks.extend(line for line in plain_lines(document) if KEYWORDS.search(line) and DATE_RE.search(line))
+def fixed_timezone(name: str) -> timezone | None:
+    if re.fullmatch(r"AoE|Anywhere on Earth", name, re.I):
+        return timezone(timedelta(hours=-12))
+    matched = re.fullmatch(r"(?:UTC|GMT)(?:([+-])(\d{1,2})(?::(\d{2}))?)?", name, re.I)
+    if not matched:
+        return None
+    hours, minutes = int(matched[2] or 0), int(matched[3] or 0)
+    if hours > 14 or minutes > 59:
+        return None
+    offset = timedelta(hours=hours, minutes=minutes)
+    return timezone(-offset if matched[1] == "-" else offset)
 
-    found: dict[str, str] = {}
+
+def deadline_kind(label: str) -> str | None:
+    label = label.replace("_", " ")
+    if EXCLUDE.search(label) or not KEYWORDS.search(label):
+        return None
+    return "abstract_deadline" if re.search(r"abstract|registration", label, re.I) else "deadline"
+
+
+def text_deadline(block: str, expected_year: int, default_timezone: str | None) -> tuple[str, str, str] | None:
+    dates = list(DATE_RE.finditer(block))
+    if len(dates) != 1:
+        return None
+    value = parse_date(dates[0])
+    if int(value[:4]) not in {expected_year - 1, expected_year}:
+        return None
+    zone_match = re.search(r"Anywhere on Earth|\bAoE\b|\b(?:UTC|GMT)(?:\s*[+-]\s*\d{1,2}(?::\d{2})?)?", block, re.I)
+    zone_name = re.sub(r"\s+", "", zone_match[0]) if zone_match else default_timezone
+    if zone_match and re.fullmatch("Anywhere on Earth", zone_match[0], re.I):
+        zone_name = "UTC-12"
+    zone = fixed_timezone(zone_name or "")
+    if zone is None:
+        return None
+    clock_text = block[:zone_match.start()] + block[zone_match.end():] if zone_match else block
+    clock = re.search(r"\b(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?\b", clock_text, re.I)
+    if clock:
+        hour, minute, second = int(clock[1]), int(clock[2]), int(clock[3] or 0)
+        if clock[4]:
+            if not 1 <= hour <= 12:
+                return None
+            hour = hour % 12 + (12 if clock[4].upper() == "PM" else 0)
+        value = f"{value[:10]} {hour:02d}:{minute:02d}:{second:02d}"
+    elif zone != timezone(timedelta(hours=-12)):
+        # A bare UTC date does not specify whether the cutoff is morning or evening.
+        return None
+    try:
+        instant = datetime.strptime(value, "%Y-%m-%d %H:%M:%S").replace(tzinfo=zone)
+    except ValueError:
+        return None
+    canonical = instant.astimezone(timezone(timedelta(hours=-12)))
+    return canonical.strftime("%Y-%m-%d %H:%M:%S"), zone_name, "page" if zone_match else "registry"
+
+
+def extract_deadline_observations(document: str, expected_year: int, default_timezone: str | None = None) -> list[dict]:
+    """Read literal dates, never execute scripts or infer a missing timezone."""
+    document = re.sub(r"<!--.*?-->|<(?:del|s|strike)\b[^>]*>.*?</(?:del|s|strike)>", " ", document, flags=re.I | re.S)
+    # Some official pages declare AoE once for the entire main-paper timetable.
+    if re.search(r"(?:all\s+(?:submission\s+)?deadlines\b|deadlines\s+are\b)[^.\n<]{0,100}(?:anywhere on earth|\bAoE\b|UTC\s*-\s*12)", plain_text(document), re.I):
+        default_timezone = "UTC-12"
+        global_zone = True
+    else:
+        global_zone = False
+    blocks = [match for tag in ("tr", "p", "li", "dt", "dd", "article")
+              for match in re.finditer(rf"<{tag}\b[^>]*>(?P<body>.*?)</{tag}>", document, re.I | re.S)]
+    headings = [(match.start(), plain_text(match[1])) for match in re.finditer(r"<h[1-6]\b[^>]*>(.*?)</h[1-6]>", document, re.I | re.S)]
+    observations = []
+
+    def add(field: str, value: str, method: str, evidence: str, round_number: int, **extra) -> None:
+        observations.append({"field": field, "value": value, "method": method,
+                             "evidence": re.sub(r"\s+", " ", evidence).strip()[:300],
+                             "round": round_number, **extra})
+
+    # Whitelisted date variables used by the official countdown template. Multiple
+    # copies of a variable are harmless; non-paper variables never match.
+    for match in re.finditer(r"\b(?:var|let|const)\s+((?:round_\d+_)?(?:paper_registration_deadline|abstract_deadline|paper_submission_deadline|submission_deadline|paper_deadline)(?:_\d+)?)\s*=\s*['\"](\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) UTC['\"]", document):
+        name, raw = match[1], match[2]
+        try:
+            instant = datetime.strptime(raw, "%Y/%m/%d %H:%M:%S").replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue
+        if instant.year not in {expected_year - 1, expected_year}:
+            continue
+        enclosing = min((block for block in blocks if block.start() <= match.start() < block.end()), key=lambda block: len(block[0]), default=None)
+        if enclosing and EXCLUDE.search(plain_text(enclosing["body"])):
+            continue
+        heading = next((label for position, label in reversed(headings) if position < match.start()), "")
+        if EXCLUDE.search(heading):
+            continue
+        round_match = re.search(r"round_(\d+)", name)
+        add(deadline_kind(name), instant.astimezone(timezone(timedelta(hours=-12))).strftime("%Y-%m-%d %H:%M:%S"),
+            "official_countdown", f"{name} = {raw} UTC", int(round_match[1]) if round_match else 0,
+            source_timezone="UTC", timezone_source="page")
+
     for block in blocks:
-        if not KEYWORDS.search(block) or EXCLUDE.search(block):
+        # Retain each row/paragraph's label and date together.
+        value = re.sub(r"\s+", " ", plain_text(block["body"])).strip()
+        field = deadline_kind(value)
+        heading = next((label for position, label in reversed(headings) if position < block.start()), "")
+        if not field or EXCLUDE.search(heading):
             continue
-        dates = list(DATE_RE.finditer(block))
-        if not dates:
+        parsed = text_deadline(value, expected_year, default_timezone)
+        if not parsed:
             continue
-        value = parse_date(dates[0])
-        if int(value[:4]) not in {expected_year - 1, expected_year}:
+        round_match = re.search(r"\bround\s+(\d+)", value, re.I)
+        timestamp, zone, zone_source = parsed
+        add(field, timestamp, "labelled_date", value, int(round_match[1]) if round_match else 0,
+            source_timezone=zone, timezone_source="page" if global_zone else zone_source)
+    return observations
+
+
+def select_deadlines(observations: list[dict]) -> dict[str, dict]:
+    """The existing UI has one cutoff pair: use the latest main-paper round."""
+    papers = [item for item in observations if item["field"] == "deadline"]
+    selected_round = max(papers, key=lambda item: item["value"])["round"] if papers else None
+    selected = {}
+    for field in ("deadline", "abstract_deadline"):
+        choices = [item for item in observations if item["field"] == field and (selected_round is None or item["round"] == selected_round)]
+        if choices:
+            # A later official extension wins; exact countdown data breaks ties.
+            selected[field] = max(choices, key=lambda item: (item["value"], item["method"] == "official_countdown"))
+    return selected
+
+
+def extract_deadlines(document: str, expected_year: int) -> dict[str, str]:
+    return {field: item["value"] for field, item in select_deadlines(extract_deadline_observations(document, expected_year)).items()}
+
+
+def deadline_reference(url: str, label: str, home: Page, source: dict, year: int) -> bool:
+    if normalized_host(url) != normalized_host(home.final_url):
+        if not trusted_host(url, source) or not identity_year_match(f"{url} {label}", source, year):
+            return False
+    parsed = urllib.parse.urlparse(url)
+    home_path = urllib.parse.urlparse(home.final_url).path.rstrip("/")
+    if re.search(r"/index\.html?$", home_path, re.I):
+        home_path = home_path.rsplit("/", 1)[0]
+    same_host = normalized_host(url) == normalized_host(home.final_url)
+    scoped = same_host and (
+        (bool(home_path) and parsed.path.startswith(home_path + "/"))
+        or (not home_path and normalized_host(home.final_url) == normalized_host(formatted_candidate(source, year)))
+    )
+    if not scoped and not identity_year_match(f"{url} {label}", source, year):
+        return False
+    reference = urllib.parse.unquote(f"{parsed.path} {parsed.query} {label}")
+    if EXCLUDE.search(reference) or re.search(r"\.(?:pdf|ics|zip|jpg|png)$", parsed.path, re.I):
+        return False
+    years = re.findall(r"(?<!\d)20\d{2}(?!\d)", f"{parsed.hostname} {reference}")
+    if any(int(value) != year for value in years):
+        return False
+    return bool(re.search(r"\bdates?\b|\bdeadlines?\b|important[-_ /]*dates|call[-_ /]*for[-_ /]*papers|\bcfp\b|main[-_ /]*technical[-_ /]*track", reference, re.I))
+
+
+def deadline_pages(home: Page, source: dict, year: int) -> tuple[list[Page], list[str]]:
+    pages, errors = [], []
+    queue = extract_links(home.document, home.final_url)
+    seen = {candidate_key(home.final_url)}
+    attempted = 0
+    while queue and attempted < MAX_DEADLINE_PAGES:
+        url, label = queue.pop(0)
+        key = candidate_key(url)
+        if key in seen or not deadline_reference(url, label, home, source, year):
             continue
-        if re.search(r"abstract|registration", block, re.I):
-            found.setdefault("abstract_deadline", value)
-        elif re.search(r"paper|submission", block, re.I):
-            found.setdefault("deadline", value)
-    return found
+        seen.add(key)
+        attempted += 1
+        try:
+            page = fetch(url)
+            if not deadline_reference(page.final_url, label, home, source, year):
+                raise RuntimeError("deadline page redirected outside the target edition")
+            identity = f"{page_title(page.document)} {page_headings(page.document)}"
+            declared_years = re.findall(r"(?<!\d)20\d{2}(?!\d)", identity)
+            neutral_heading = set(normalize_words(re.sub(r"\b20\d{2}\b", "", identity)).split()) <= {
+                "important", "key", "dates", "date", "deadline", "deadlines", "call", "for",
+                "papers", "paper", "submission", "submissions", "main", "track", "cfp",
+            }
+            wrong_identity = declared_years and (
+                str(year) not in declared_years or (not neutral_heading and not identity_year_match(identity, source, year))
+            )
+            if SOFT_ERROR.search(plain_text(page.document)) or wrong_identity:
+                raise RuntimeError("deadline page does not identify the target edition")
+            # Yearless subpages inherit identity only on the verified edition host.
+            if not declared_years and normalized_host(page.final_url) != normalized_host(home.final_url):
+                raise RuntimeError("deadline page lacks target edition identity")
+            pages.append(page)
+            queue.extend(extract_links(page.document, page.final_url))
+        except Exception as exc:
+            errors.append(f"{url}: {exc}")
+    # A dedicated Dates/CFP page is preferred when duplicate facts match.
+    return pages + [home], errors
 
 
 def jsonld_nodes(document: str) -> Iterable[dict]:
@@ -629,6 +798,12 @@ def extract_location(document: str, expected_year: int, source: dict | None = No
         if found:
             return location_result(found, "schema_org_event", json.dumps(node.get("location"), ensure_ascii=False))
 
+    # Official conference templates mark the hero's city with a location icon.
+    for badge in re.finditer(r"<i\b[^>]*class=['\"][^'\"]*\b(?:fa-map-marker-alt|fa-map-marker|fa-location-dot)\b[^'\"]*['\"][^>]*>.*?</div>", document, re.I | re.S):
+        found = clean_location(plain_text(badge[0]))
+        if found:
+            return location_result(found, "location_badge", plain_text(badge[0]))
+
     lines = plain_lines(document)
     date_location = re.compile(
         rf"(?P<date>.{{0,85}}(?:{MONTH_PATTERN}).{{0,55}}\b{expected_year}\b)"
@@ -638,7 +813,7 @@ def extract_location(document: str, expected_year: int, source: dict | None = No
     label_location = re.compile(r"^(?:location|venue|where)\s*[:|·–—-]\s*(.+)$", re.I)
     held_in = re.compile(
         r"\b(?:(?:will be held|is held|join us)\b.{0,45}?\bin|will be\s+in)\s+"
-        r"(?P<location>[^.!;]{2,100}?)(?=\s+(?:from|on|for|during)\b|[.!;]|$)",
+        rf"(?P<location>[^.!;]{{2,100}}?)(?=\s+(?:from|on|for|during|{MONTH_PATTERN})\b|[.!;]|$)",
         re.I,
     )
 
@@ -715,6 +890,18 @@ def extract_series_location(document: str, source: dict, expected_year: int) -> 
         re.I,
     )
     for line in lines:
+        if identity_year_match(line, source, expected_year) and re.search(r"\bwill be held\b", line, re.I):
+            # Official multi-site announcements can have a separate date range
+            # before each city; preserve both rather than truncating the first.
+            dated_places = re.findall(
+                rf"\b{expected_year}\b\s+in\s+(.{{2,100}}?)(?=\s+and\s+from\b|[.!;]|$)",
+                line, re.I,
+            )
+            places = [clean_location(value) for value in dated_places]
+            if places and all(places):
+                combined = clean_location("; ".join(dict.fromkeys(places)))
+                if combined:
+                    return location_result(combined, "official_future_meeting", line)
         matched = announced_in.search(line)
         if matched and identity_year_match(line, source, expected_year):
             found = clean_location(matched.group("location"))
@@ -748,6 +935,10 @@ def atomic_write(path: Path, value: str) -> None:
 def apply_location_stability(extracted: dict | None, prior: dict, now: datetime, source_url: str) -> tuple[dict | None, dict | None]:
     previous = prior.get("location") if isinstance(prior.get("location"), dict) else None
     pending = prior.get("pending_location") if isinstance(prior.get("pending_location"), dict) else None
+    if previous and not clean_location(previous.get("display", "")):
+        previous = None
+    if pending and not clean_location(pending.get("display", "")):
+        pending = None
     if not extracted:
         return previous, pending
 
@@ -759,6 +950,14 @@ def apply_location_stability(extracted: dict | None, prior: dict, now: datetime,
     if not previous or previous.get("display") == observed["display"]:
         return observed, None
 
+    # Repair a demonstrated old HTML-newline truncation immediately; genuine
+    # location changes still require the existing two-observation confirmation.
+    if (previous.get("method") == observed.get("method") == "held_in_sentence"
+            and previous.get("source_url") == source_url
+            and observed["display"].startswith(previous.get("display", "") + " ")
+            and observed.get("evidence", "").startswith(previous.get("evidence", "") + " ")):
+        return observed, None
+
     count = int(pending.get("observations", 0)) + 1 if pending and pending.get("display") == observed["display"] else 1
     proposed = {**observed, "observations": count}
     if count >= 2:
@@ -766,8 +965,77 @@ def apply_location_stability(extracted: dict | None, prior: dict, now: datetime,
     return previous, proposed
 
 
+def refresh_year(source: dict, prior: dict, now: datetime) -> int:
+    if prior.get("year") == now.year:
+        cutoff = (prior.get("deadlines") or {}).get("deadline")
+        zone = fixed_timezone(prior.get("timezone") or "UTC-12")
+        try:
+            instant = datetime.strptime(cutoff, "%Y-%m-%d %H:%M:%S").replace(tzinfo=zone) if cutoff and zone else None
+        except ValueError:
+            instant = None
+        # January must not skip an edition whose submissions are still open,
+        # or whose paper deadline has not yet been published/parsed.
+        if instant is None or instant >= now:
+            return now.year
+    return edition_year(source["year_rule"], now.year)
+
+
+def merge_deadlines(source: dict, prior: dict, year: int, pages: list[Page], now: datetime) -> tuple[dict, dict, str]:
+    known = dict((source.get("known") or {}).get(year, {}))
+    deadlines, evidence = {}, {}
+    abstract_pair_deadline = None
+    target_zone = timezone(timedelta(hours=-12))
+    for fallback, status, zone_name in (
+        (known, "reviewed_fallback", known.get("timezone") or "UTC-12"),
+        (prior.get("deadlines") or {}, "retained", prior.get("timezone") or "UTC-12"),
+    ):
+        zone = fixed_timezone(zone_name)
+        fallback_paper = None
+        for field in ("deadline", "abstract_deadline"):
+            if not zone or not fallback.get(field):
+                continue
+            try:
+                instant = datetime.strptime(fallback[field], "%Y-%m-%d %H:%M:%S").replace(tzinfo=zone)
+            except ValueError:
+                continue
+            deadlines[field] = instant.astimezone(target_zone).strftime("%Y-%m-%d %H:%M:%S")
+            if field == "deadline":
+                fallback_paper = deadlines[field]
+            else:
+                abstract_pair_deadline = fallback_paper
+            evidence[field] = {**((prior.get("deadline_evidence") or {}).get(field, {}) if status == "retained" else {}), "status": status}
+    observations = []
+    for page in pages:
+        for item in extract_deadline_observations(page.document, year, known.get("timezone")):
+            observations.append({**item, "source_url": page.final_url, "verified_at": now.isoformat(), "status": "verified"})
+    selected = select_deadlines(observations)
+    paper = selected.get("deadline") or {**evidence.get("deadline", {}), "value": deadlines.get("deadline")}
+    if paper.get("round") and "abstract_deadline" not in selected:
+        abstract_round = evidence.get("abstract_deadline", {}).get("round")
+        same_round = abstract_round == paper["round"]
+        same_pair = abstract_round is None and abstract_pair_deadline == paper["value"]
+        if not same_round and not same_pair:
+            deadlines.pop("abstract_deadline", None)
+            evidence.pop("abstract_deadline", None)
+    for field, item in selected.items():
+        deadlines[field] = item["value"]
+        evidence[field] = item
+    statuses = {item["status"] for item in evidence.values()}
+    if not statuses:
+        status = "not_detected"
+    elif statuses == {"verified"}:
+        status = "verified"
+    elif "verified" in statuses:
+        status = "partial"
+    elif "retained" in statuses:
+        status = "retained"
+    else:
+        status = "reviewed_fallback"
+    return deadlines, evidence, status
+
+
 def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict]:
-    year = edition_year(source["year_rule"], now.year)
+    year = refresh_year(source, prior, now)
     same_prior = prior if prior.get("year") == year else {}
     candidates, errors = discovery_candidates(source, year, same_prior)
     verified_page: Page | None = None
@@ -779,15 +1047,14 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
             break
         errors.append(f"{candidate.url}: {error}")
 
-    known = dict((source.get("known") or {}).get(year, {}))
-    prior_deadlines = dict(same_prior.get("deadlines") or {})
-    extracted_deadlines = {}
+    pages = []
     if verified_page:
-        extracted_deadlines = extract_deadlines(verified_page.document, year)
-    # Explicitly reviewed values remain authoritative. For other fields, a newly
-    # extracted value can correct the prior snapshot.
-    deadlines = {**prior_deadlines, **extracted_deadlines, **known}
-    timezone_name = deadlines.pop("timezone", None) or same_prior.get("timezone") or "UTC-12"
+        pages, deadline_errors = deadline_pages(verified_page, source, year)
+        errors.extend(deadline_errors)
+    deadlines, deadline_evidence, deadline_status = merge_deadlines(source, same_prior, year, pages, now)
+    timezone_name = "UTC-12"
+    primary_evidence = deadline_evidence.get("deadline") or deadline_evidence.get("abstract_deadline") or {}
+    deadline_source_url = primary_evidence.get("source_url")
 
     if verified_page and verified_candidate:
         official_url = verified_page.final_url
@@ -819,13 +1086,9 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
                 extracted_location["precision"] = location_source.get("precision") or "locality"
                 location_source_url = location_page.final_url
                 break
-    if extracted_location and location_source_url:
-        location, pending_location = apply_location_stability(
-            extracted_location, same_prior, now, location_source_url
-        )
-    else:
-        location = same_prior.get("location")
-        pending_location = same_prior.get("pending_location")
+    location, pending_location = apply_location_stability(
+        extracted_location, same_prior, now, location_source_url or source["series_url"]
+    )
 
     display_url = official_url or source["series_url"]
     timeline = [deadlines] if any(key.endswith("deadline") for key in deadlines) else []
@@ -838,6 +1101,8 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
         "official_page_announced": bool(official_url),
         "timeline": timeline,
         "timezone": timezone_name,
+        "deadline_source_url": deadline_source_url,
+        "deadline_status": deadline_status,
         "date": "TBD",
         "place": place,
         "place_status": (
@@ -870,6 +1135,9 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
         "discovery_method": discovery_method,
         "verified_at": verified_at,
         "deadlines": deadlines,
+        "deadline_evidence": deadline_evidence,
+        "deadline_status": deadline_status,
+        "deadline_pages": [page.final_url for page in pages],
         "timezone": timezone_name,
         "location": location,
         "pending_location": pending_location,

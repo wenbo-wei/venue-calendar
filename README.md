@@ -27,18 +27,36 @@ Then open <http://localhost:8080>.
 - probes known URL patterns without assuming that a future page already exists;
 - discovers target-year links from official hubs and their sitemaps;
 - accepts an edition page only after HTTP success and a venue + year identity check;
+- follows a bounded set of trusted, target-edition Dates and Call for Papers pages;
+- reads official UTC countdowns and labelled submission dates, preserving their
+  time zones and source evidence;
+- lets newly verified official dates replace older dates, using reviewed registry
+  values only as fallbacks;
 - extracts high-confidence locations from Schema.org data, labelled official text,
-  event banners, or explicit official future-meetings pages;
+  event banners, or explicit official future-meetings pages, excluding placeholders;
 - keeps the last verified value when a site is temporarily unavailable; and
 - requires two consecutive observations before replacing an existing location.
 
-GitHub Actions runs this refresh every six hours. The site remains a static,
-fast snapshot and reloads that snapshot every six hours while left open. An
+GitHub Actions runs this refresh once every 24 hours, scheduled for 21:17 UTC
+(05:17 the following day in Beijing; GitHub may delay scheduled runs). Pushes to
+`main` and manual workflow runs also refresh and deploy the site. The site remains
+a static snapshot, checks for a new snapshot when opened or revisited, and reloads
+it every 15 minutes while left open. These browser checks do not scrape conference
+websites. An
 unannounced edition links to its official series hub instead of a guessed or
 broken future URL.
 
-Each accepted location stores its official source URL, extraction method,
-evidence text, precision, and verification time in `data/refresh_state.json`.
+Accepted deadlines and locations store their official source URLs and extraction
+evidence in `data/refresh_state.json`. The workflow summary lists the results for
+each conference so a successful deployment can be distinguished from missing data.
+Each successful check saves its snapshot and check time to the repository, including
+days without changed deadlines, keeping the scheduled repository active.
 The generated `data/conferences.js` contains only the display snapshot.
+
+Run the offline parser regression tests with:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
 
 Deadlines and rankings are provided for convenience. Always verify submission details on the official venue website before submitting.
