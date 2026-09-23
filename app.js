@@ -1,6 +1,7 @@
 (() => {
   const state = { view: "conference", query: "", rank: "all" };
-  const els = Object.fromEntries(["cards", "search", "empty", "updated", "conference-count", "journal-count"].map(id => [id, document.getElementById(id)]));
+  const els = Object.fromEntries(["cards", "search", "empty", "updated", "conference-count", "journal-count", "results", "result-status"].map(id => [id, document.getElementById(id)]));
+  const expandedVerification = new Set();
 
   const escapeHtml = value => String(value ?? "").replace(/[&<>'"]/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char]));
   const rankOf = venue => venue.rank?.ccf || venue.rank || "N";
@@ -124,8 +125,8 @@
       { days: 60, color: [22, 143, 234] }
     ];
     const upperIndex = stops.findIndex(stop => days <= stop.days);
-    if (upperIndex === 0) return stops[0];
-    if (upperIndex === -1) return stops[stops.length - 1];
+    if (upperIndex === 0) return { color: `rgb(${stops[0].color.join(" ")})` };
+    if (upperIndex === -1) return { color: `rgb(${stops[stops.length - 1].color.join(" ")})` };
     const lower = stops[upperIndex - 1];
     const upper = stops[upperIndex];
     const progress = (days - lower.days) / (upper.days - lower.days);
@@ -146,31 +147,47 @@
     const officialHref = hasLocation && item.location_source_url ? item.location_source_url : item.link;
     const linkLabel = item.link_kind === "edition" ? "Official site ↗" : "Official series ↗";
     const deadlineLink = item.next.date && item.deadline_source_url ? `<a href="${escapeHtml(item.deadline_source_url)}" target="_blank" rel="noreferrer">Deadline source ↗</a>` : "";
-    const deadlineLabel = item.next.date ? `${item.next.type} deadline · Local time` : "Submission deadline";
-    const countdownText = item.next.date ? countdown(item.next.date) : "Deadline not yet verified";
     const discoveryLabel = {
       unverified_candidates: "Official site awaiting verification",
       search_unavailable: "Official site search temporarily unavailable",
       not_found: "Official site not yet found"
     }[item.discovery_status];
-    const detailText = item.next.date ? dateText : (discoveryLabel || "TBD");
+    const venueKey = item.id || `${item.title}-${item.year}`;
+    const deadlineContent = item.next.date
+      ? `<small>${escapeHtml(item.next.type)} deadline · Local time</small><div class="countdown"${countdownData}>${escapeHtml(countdown(item.next.date))}</div><time class="deadline-date" datetime="${item.next.date.toISOString()}">${escapeHtml(dateText)}</time>`
+      : `<details class="verification" data-venue-key="${escapeHtml(venueKey)}"${expandedVerification.has(venueKey) ? " open" : ""}><summary>Verification details</summary><p>Deadline not yet verified</p><p>${escapeHtml(discoveryLabel || "TBD")}</p></details>`;
     return `<article class="card ${item.past ? "inactive" : ""}${urgencyClass}"${urgencyStyle}>
-      <div class="card-top"><div class="venue"><h2>${escapeHtml(item.title)} <small>${item.year}</small></h2><p>${escapeHtml(item.venueDescription)}</p>${location}</div></div>
-      <div class="deadline"><small>${escapeHtml(deadlineLabel)}</small><div class="countdown"${countdownData}>${escapeHtml(countdownText)}</div><time class="deadline-date"${item.next.date ? ` datetime="${item.next.date.toISOString()}"` : ""}>${escapeHtml(detailText)}</time></div>
+      <div class="card-top"><div class="venue"><h3>${escapeHtml(item.title)} <small>${item.year}</small></h3><p>${escapeHtml(item.venueDescription)}</p>${location}</div></div>
+      <div class="deadline">${deadlineContent}</div>
       <div class="card-bottom"><span class="rank ${escapeHtml(item.ccfRank)}">CCF ${escapeHtml(item.ccfRank)}</span><div class="links">${deadlineLink}<a href="${escapeHtml(officialHref)}" target="_blank" rel="noreferrer">${linkLabel}</a></div></div>
     </article>`;
   }
 
   function journalCard(item) {
     return `<article class="card journal-card ${item.inactive ? "inactive" : ""}">
-      <div class="card-top"><div class="venue"><h2>${escapeHtml(item.title)}</h2><p>${escapeHtml(item.name)}</p></div></div>
+      <div class="card-top"><div class="venue"><h3>${escapeHtml(item.title)}</h3><p>${escapeHtml(item.name)}</p></div></div>
       <div class="deadline"><small>Submission cycle</small><strong>${item.inactive ? "Discontinued" : "Rolling submissions · No fixed deadline"}</strong></div>
       <div class="card-bottom"><span class="rank ${escapeHtml(item.rank)}">CCF ${escapeHtml(item.rank)}</span><div class="links"><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">Journal site ↗</a></div></div>
     </article>`;
   }
 
+  function venueGroup(id, title, description, items, makeCard) {
+    if (!items.length) return "";
+    return `<section class="venue-group" aria-labelledby="${id}"><header class="group-heading"><h2 id="${id}">${title}<span class="group-count">${items.length}</span></h2><p>${description}</p></header><div class="venue-list">${items.map(makeCard).join("")}</div></section>`;
+  }
+
+  function rememberVerification(details) {
+    if (details.open) expandedVerification.add(details.dataset.venueKey);
+    else expandedVerification.delete(details.dataset.venueKey);
+  }
+
   function render() {
+    // Native toggle events are queued, so read open states before replacing the DOM.
+    els.cards.querySelectorAll(".verification").forEach(rememberVerification);
+    const focusedVerification = document.activeElement?.matches(".verification > summary")
+      ? document.activeElement.parentElement.dataset.venueKey : null;
     let items;
+    let resultStatus;
     if (state.view === "conference") {
       items = flattenConferences().filter(item => !item.past && matches(item) && matchesRank(item)).sort((a, b) => {
         if (a.next.date && b.next.date) return a.next.date - b.next.date;
@@ -179,22 +196,52 @@
         const yearOrder = Number(a.year) - Number(b.year);
         return yearOrder || a.title.localeCompare(b.title);
       });
-      els.cards.innerHTML = items.map((item, index) => {
-        const startsUndatedGroup = !item.next.date && index > 0 && items[index - 1].next.date;
-        const divider = startsUndatedGroup ? '<div class="deadline-divider" role="separator" aria-label="Deadlines not yet announced"></div>' : "";
-        return divider + conferenceCard(item);
-      }).join("");
+      const dated = items.filter(item => item.next.date);
+      const undated = items.filter(item => !item.next.date);
+      els.cards.innerHTML = venueGroup("deadlines-heading", "Upcoming deadlines", "Soonest first · Your local time", dated, conferenceCard)
+        + venueGroup("unverified-heading", "Awaiting verification", "Submission deadlines not yet verified", undated, conferenceCard);
+      resultStatus = `${items.length} conference editions shown. ${dated.length} with deadlines; ${undated.length} awaiting verification.`;
     } else {
       items = allJournals.filter(item => matches(item) && matchesRank(item) && !item.inactive);
-      els.cards.innerHTML = items.map(journalCard).join("");
+      els.cards.innerHTML = venueGroup("journals-heading", "Open submissions", "Submit throughout the year", items, journalCard);
+      resultStatus = `${items.length} journals shown.`;
     }
     els.empty.classList.toggle("hidden", items.length > 0);
+    if (els["result-status"].textContent !== resultStatus) els["result-status"].textContent = resultStatus;
+    if (focusedVerification !== null) {
+      [...els.cards.querySelectorAll(".verification")]
+        .find(details => details.dataset.venueKey === focusedVerification)
+        ?.querySelector("summary")?.focus({ preventScroll: true });
+    }
   }
 
-  document.querySelectorAll(".tab").forEach(tab => tab.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(item => item.classList.remove("active"));
-    tab.classList.add("active"); state.view = tab.dataset.view; render();
-  }));
+  const tabs = [...document.querySelectorAll(".tab")];
+  function selectTab(tab) {
+    tabs.forEach(item => {
+      const active = item === tab;
+      item.classList.toggle("active", active);
+      item.setAttribute("aria-selected", String(active));
+      item.tabIndex = active ? 0 : -1;
+    });
+    els.results.setAttribute("aria-labelledby", tab.id);
+    state.view = tab.dataset.view;
+    render();
+  }
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectTab(tab));
+    tab.addEventListener("keydown", event => {
+      const targetIndex = { ArrowRight: (index + 1) % tabs.length, ArrowLeft: (index - 1 + tabs.length) % tabs.length, Home: 0, End: tabs.length - 1 }[event.key];
+      if (targetIndex === undefined) return;
+      event.preventDefault();
+      tabs[targetIndex].focus();
+      selectTab(tabs[targetIndex]);
+    });
+  });
+  els.cards.addEventListener("toggle", event => {
+    const details = event.target;
+    if (!details.matches(".verification") || !details.isConnected) return;
+    rememberVerification(details);
+  }, true);
   document.querySelectorAll(".rank-option").forEach(option => option.addEventListener("click", () => {
     document.querySelectorAll(".rank-option").forEach(item => {
       const active = item === option;

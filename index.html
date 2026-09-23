@@ -6,7 +6,7 @@
   <meta name="description" content="A focused calendar for conference deadlines and selected journals.">
   <title>Venue Calendar</title>
   <link rel="icon" href="favicon.svg?v=2" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=18">
+  <link rel="stylesheet" href="styles.css?v=19">
 </head>
 <body>
   <main class="shell">
@@ -15,8 +15,8 @@
         <p class="eyebrow">CONFERENCE &amp; JOURNAL TRACKER</p>
         <h1>Venue <span>Calendar</span></h1>
       </div>
-      <aside class="urgency-legend" aria-label="Deadline urgency color legend">
-        <p>Deadline colors</p>
+      <details class="urgency-legend">
+        <summary>Deadline color guide</summary>
         <div class="legend-items">
           <span><i style="--legend-color:rgb(143 29 44)"></i>0 days</span>
           <span><i style="--legend-color:rgb(255 0 0)"></i>3 days</span>
@@ -28,26 +28,33 @@
           <span><i style="--legend-color:rgb(22 143 234)"></i>60+ days</span>
           <span><i style="--legend-color:rgb(168 173 170)"></i>Not verified</span>
         </div>
-      </aside>
+      </details>
     </header>
 
     <section class="toolbar" aria-label="View and filters">
-      <div class="tabs" role="tablist">
-        <button class="tab active" data-view="conference" role="tab">Conferences <span id="conference-count"></span></button>
-        <button class="tab" data-view="journal" role="tab">Journals <span id="journal-count"></span></button>
+      <div class="tabs" role="tablist" aria-label="Venue type">
+        <button id="conference-tab" class="tab active" data-view="conference" role="tab" aria-selected="true" aria-controls="results" tabindex="0">Conferences <span id="conference-count"></span></button>
+        <button id="journal-tab" class="tab" data-view="journal" role="tab" aria-selected="false" aria-controls="results" tabindex="-1">Journals <span id="journal-count"></span></button>
       </div>
-      <label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search venues…"></label>
-      <div class="rank-filter" aria-label="Filter by CCF rank">
-        <button class="rank-option active" data-rank="all" aria-pressed="true">All</button>
-        <button class="rank-option A" data-rank="A" aria-pressed="false">A</button>
-        <button class="rank-option B" data-rank="B" aria-pressed="false">B</button>
-        <button class="rank-option C" data-rank="C" aria-pressed="false">C</button>
-        <button class="rank-option N" data-rank="N" aria-pressed="false">N</button>
+      <label class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 4.5 4.5"></path></svg>
+        <span class="sr-only">Search venues</span>
+        <input id="search" type="search" placeholder="Search venues…">
+      </label>
+      <div class="rank-filter" role="group" aria-label="Filter by CCF rank">
+        <button class="rank-option active" data-rank="all" aria-label="All CCF ranks" aria-pressed="true">All</button>
+        <button class="rank-option A" data-rank="A" aria-label="CCF rank A" aria-pressed="false">A</button>
+        <button class="rank-option B" data-rank="B" aria-label="CCF rank B" aria-pressed="false">B</button>
+        <button class="rank-option C" data-rank="C" aria-label="CCF rank C" aria-pressed="false">C</button>
+        <button class="rank-option N" data-rank="N" aria-label="CCF rank N" aria-pressed="false">N</button>
       </div>
     </section>
 
-    <section id="cards" class="cards" aria-live="polite"></section>
-    <div id="empty" class="empty hidden"><strong>No matches</strong><span>Try another search term or filter.</span></div>
+    <p id="result-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+    <section id="results" role="tabpanel" aria-labelledby="conference-tab" tabindex="0">
+      <div id="cards" class="cards"></div>
+      <div id="empty" class="empty hidden"><strong>No matches</strong><span>Try another search term or filter.</span></div>
+    </section>
 
     <footer>
       <p>Venue Calendar · Data from official venue websites</p>
@@ -56,6 +63,6 @@
   </main>
   <script src="data/conferences.js?v=5"></script>
   <script src="data/journals.js?v=4"></script>
-  <script src="app.js?v=18"></script>
+  <script src="app.js?v=19"></script>
 </body>
 </html>
