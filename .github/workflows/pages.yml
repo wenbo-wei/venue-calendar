@@ -41,15 +41,18 @@ jobs:
           from pathlib import Path
           state = json.loads(Path("data/refresh_state.json").read_text())
           print(f"Official sites checked: {state['checked_at']}")
-          print("\n| Conference | Official page | Deadlines | Location |")
-          print("| --- | --- | --- | --- |")
+          print("\n| Conference | Official page | Discovery | Search | Deadlines | Location |")
+          print("| --- | --- | --- | --- | --- | --- |")
           for slug, venue in state["venues"].items():
               dates = ", ".join(f"{key}: {value}" for key, value in venue.get("deadlines", {}).items()) or "Not verified"
               if venue.get("deadlines"):
                   dates += f" ({venue.get('timezone', 'UTC-12')})"
               location = (venue.get("location") or {}).get("display", "Not verified")
-              cells = [slug, venue["status"], dates, location]
+              discovery = venue.get("discovery_status", venue["status"])
+              search = venue.get("discovery_details", {}).get("search_status", "not_needed")
+              cells = [slug, venue["status"], discovery, search, dates, location]
               print("| " + " | ".join(str(cell).replace("|", "\\|").replace("\n", " ") for cell in cells) + " |")
+          print("\nSearch attempts and unverified candidate URLs are recorded in data/refresh_state.json.")
           PY
       - name: Save refreshed data
         run: |

@@ -26,6 +26,8 @@ from typing import Iterable
 
 import yaml
 
+from search_web import search_web
+
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCES = ROOT / "data" / "official_sources.yml"
@@ -35,6 +37,10 @@ MAX_RESPONSE_BYTES = 4_000_000
 MAX_SITEMAPS = 6
 MAX_CANDIDATES = 12
 MAX_DEADLINE_PAGES = 4
+MAX_ANNOUNCEMENT_PAGES = 4
+MAX_HISTORY = 3
+MAX_UNVERIFIED = 8
+MAX_SEARCH_SOURCES = 4
 USER_AGENT = "VenueCalendar/2.0 (+https://github.com/wenbo-wei/venue-calendar)"
 
 MONTH_PATTERN = (
@@ -93,8 +99,9 @@ SOFT_ERROR = re.compile(
 NON_HOMEPAGE = re.compile(
     r"\b(?:call for papers|cfp|important dates?|deadlines?|accepted papers?|"
     r"proceedings|workshops?|tutorials?|submission instructions?|program|"
-    r"registration|schedule|committees?|travel|accommodation|sponsors?|about|"
-    r"venue|news|local ?information|hotels?)\b",
+    r"registration|pricing|schedule|committees?|travel|accommodation|sponsors?|about|"
+    r"venue|news|local ?information|hotels?|polic(?:y|ies)|author ?kits?|"
+    r"reviewers?|nomination|surveys?|application forms?|volunteers?)\b",
     re.I,
 )
 LOCATION_PLACEHOLDER = re.compile(
@@ -121,6 +128,7 @@ class Page:
     final_url: str
     document: str
     status: int
+    redirects: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -128,6 +136,7 @@ class Candidate:
     url: str
     discovered_from: str
     method: str
+    provenance: tuple[dict, ...] = ()
 
 
 class LinkCollector(HTMLParser):
@@ -155,10 +164,75 @@ class LinkCollector(HTMLParser):
             self._label = []
 
 
+class ContextLinkCollector(HTMLParser):
+    """Keep local paragraph/list/table context with links such as 'website'."""
+
+    BLOCKS = {"p", "li", "tr", "td", "dd", "article", "section", "div"}
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.links: list[dict] = []
+        self.blocks: list[dict] = []
+        self.anchor: dict | None = None
+        self.hidden = 0
+
+    def handle_starttag(self, tag, attrs):
+        tag = tag.lower()
+        if tag in {"script", "style", "template"}:
+            self.hidden += 1
+        if self.hidden:
+            return
+        if tag in self.BLOCKS:
+            self.blocks.append({"tag": tag, "text": [], "links": []})
+        if tag == "a" and dict(attrs).get("href"):
+            self.anchor = {"href": dict(attrs)["href"], "label": [], "contexts": []}
+            self.links.append(self.anchor)
+            for block in self.blocks:
+                block["links"].append(self.anchor)
+
+    def handle_data(self, data):
+        if self.hidden:
+            return
+        for block in self.blocks:
+            block["text"].append(data)
+        if self.anchor is not None:
+            self.anchor["label"].append(data)
+
+    def handle_endtag(self, tag):
+        tag = tag.lower()
+        if tag in {"script", "style", "template"}:
+            self.hidden = max(0, self.hidden - 1)
+            return
+        if self.hidden:
+            return
+        if tag == "a":
+            self.anchor = None
+        if tag in self.BLOCKS:
+            index = next((i for i in range(len(self.blocks) - 1, -1, -1)
+                          if self.blocks[i]["tag"] == tag), None)
+            if index is not None:
+                closing, self.blocks = self.blocks[index:], self.blocks[:index]
+                for block in reversed(closing):
+                    context = re.sub(r"\s+", " ", " ".join(block["text"])).strip()
+                    if len(context) <= 600 and len(block["links"]) <= 4:
+                        for link in block["links"]:
+                            if not link.get("localized"):
+                                link["contexts"].append(context)
+                                # A separate paragraph cannot lend its identity
+                                # to an unrelated link in a sibling paragraph.
+                                if block["tag"] in {"p", "li", "tr", "dd"}:
+                                    link["localized"] = True
+
+
 class PublicRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def __init__(self):
+        super().__init__()
+        self.redirects: list[str] = []
+
     def redirect_request(self, req, fp, code, msg, headers, newurl):
         target = urllib.parse.urljoin(req.full_url, newurl)
         assert_public_url(target)
+        self.redirects.append(target)
         return super().redirect_request(req, fp, code, msg, headers, target)
 
 
@@ -175,6 +249,8 @@ def assert_public_url(url: str) -> None:
     parsed = urllib.parse.urlparse(url)
     if parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username:
         raise RuntimeError("unsafe URL")
+    if safe_path(url) is None:
+        raise RuntimeError("ambiguous URL path")
     try:
         port = parsed.port
     except ValueError as exc:
@@ -204,7 +280,8 @@ def fetch(url: str, timeout: int = 25) -> Page:
         url,
         headers={"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml,application/xml"},
     )
-    opener = urllib.request.build_opener(PublicRedirectHandler())
+    redirects = PublicRedirectHandler()
+    opener = urllib.request.build_opener(redirects)
     try:
         with opener.open(request, timeout=timeout) as response:
             status = response.getcode()
@@ -222,7 +299,7 @@ def fetch(url: str, timeout: int = 25) -> Page:
                 if len(raw) > MAX_RESPONSE_BYTES:
                     raise RuntimeError("decompressed response too large")
             charset = response.headers.get_content_charset() or "utf-8"
-            return Page(url, final_url, raw.decode(charset, "replace"), status)
+            return Page(url, final_url, raw.decode(charset, "replace"), status, tuple(redirects.redirects))
     except urllib.error.HTTPError as exc:
         raise RuntimeError(f"HTTP {exc.code}") from exc
     except urllib.error.URLError as exc:
@@ -346,13 +423,171 @@ def normalized_host(url: str) -> str:
         return ""
 
 
+def submission_portal(url: str) -> bool:
+    """Operational submission services are evidence links, not edition homes."""
+    host = normalized_host(url)
+    if host == "docs.google.com" and urllib.parse.urlparse(url).path.startswith("/forms/"):
+        return True
+    return any(host == platform or host.endswith("." + platform) for platform in (
+        "openreview.net", "easychair.org", "edas.info", "forms.gle",
+        "cmt.research.microsoft.com", "cmt3.research.microsoft.com",
+    ))
+
+
 def trusted_host(url: str, source: dict) -> bool:
+    if safe_path(url) is None:
+        return False
     host = normalized_host(url)
     for trusted in source.get("trusted_hosts") or []:
         trusted = trusted.rstrip(".").lower().encode("idna").decode("ascii")
         if host == trusted or host.endswith(f".{trusted}"):
             return True
     return False
+
+
+def same_site(url: str, reference: str) -> bool:
+    """Only www canonicalization is inherited, never an entire parent domain."""
+    return normalized_host(url).removeprefix("www.") == normalized_host(reference).removeprefix("www.")
+
+
+def safe_path(url: str) -> str | None:
+    """Reject paths whose server-side decoding can escape an inherited scope."""
+    if "\\" in url or re.search(r"[\x00-\x1f\x7f]", url):
+        return None
+    path = urllib.parse.urlparse(url).path
+    for _ in range(5):
+        if ("\\" in path or re.search(r"%(?:2f|5c)|[\x00-\x1f\x7f]", path, re.I)
+                or any(segment.split(";", 1)[0] in {".", ".."} for segment in path.split("/"))):
+            return None
+        try:
+            decoded = urllib.parse.unquote(path, errors="strict")
+        except UnicodeError:
+            return None
+        if decoded == path:
+            return path.rstrip("/")
+        path = decoded
+    return None
+
+
+def edition_scope(url: str, home_url: str) -> bool:
+    if not same_site(url, home_url):
+        return False
+    path, target = safe_path(home_url), safe_path(url)
+    if path is None or target is None:
+        return False
+    if re.search(r"/index\.html?$", path, re.I):
+        path = path.rsplit("/", 1)[0]
+    return not path or target == path or target.startswith(path + "/")
+
+
+def official_history(prior: dict) -> list[dict]:
+    """Preserve verified edition identities, independently of current-year facts."""
+    records = [prior, *(prior.get("official_history") or [])]
+    result, seen = [], set()
+    for record in records:
+        if (not isinstance(record, dict) or not record.get("official_url") or not record.get("verified_at")
+                or submission_portal(record["official_url"])):
+            continue
+        if not isinstance(record.get("year"), int):
+            continue
+        key = (record["year"], candidate_key(record["official_url"]))
+        if key in seen:
+            continue
+        seen.add(key)
+        result.append({key: record.get(key) for key in (
+            "year", "official_url", "verified_at", "discovered_from", "discovery_method", "provenance")})
+    return sorted(result, key=lambda item: item["year"], reverse=True)[:MAX_HISTORY]
+
+
+def context_links(document: str, base_url: str) -> list[tuple[str, str, list[str]]]:
+    parser = ContextLinkCollector()
+    try:
+        parser.feed(document)
+    except Exception:
+        return []
+    result = []
+    for item in parser.links:
+        url = urllib.parse.urljoin(base_url, html.unescape(item["href"]).strip())
+        parsed = urllib.parse.urlparse(url)
+        if parsed.scheme not in {"http", "https"} or not parsed.hostname or parsed.username:
+            continue
+        url = urllib.parse.urlunparse(parsed._replace(fragment=""))
+        result.append((url, re.sub(r"\s+", " ", " ".join(item["label"])).strip(), item["contexts"]))
+    return result
+
+
+def linked_homepages(page: Page, source: dict, year: int, method: str,
+                     provenance: tuple[dict, ...] = ()) -> list[Candidate]:
+    candidates = []
+    for url, label, contexts in context_links(page.document, page.final_url):
+        if safe_path(url) is None or submission_portal(url):
+            continue
+        evidence = label
+        direct = probable_homepage_reference(url, label, source, year)
+        external = not same_site(url, page.final_url)
+        website_label = bool(re.search(r"\b(?:website|official site|homepage)\b", label, re.I))
+        if external and not (identity_year_match(label, source, year) or website_label):
+            direct = False
+        if not direct:
+            if NON_HOMEPAGE.search(urllib.parse.unquote(f"{urllib.parse.urlparse(url).path} {label}")):
+                continue
+            # Do not attach a next-year paragraph to a link explicitly labelled as
+            # a previous edition (or vice versa).
+            if any(int(value) != year for value in re.findall(r"(?<!\d)20\d{2}(?!\d)", f"{url} {label}")):
+                continue
+            evidence = next((context for context in contexts
+                             if identity_year_match(context, source, year)
+                             and not re.search(r"\b(?:workshop|tutorial|sponsor)\b", context, re.I)
+                             and re.search(r"\b(?:website|official site|homepage)\b" if external else
+                                           r"\b(?:website|official site|homepage|visit|here|conference)\b",
+                                           f"{context} {label}", re.I)), "")
+            if not evidence:
+                continue
+        proof = {"url": page.final_url, "method": method, "target_url": url,
+                 "evidence": evidence[:600], "link_label": label[:300]}
+        candidates.append(Candidate(url, page.final_url, method, (*provenance, proof)[-8:]))
+    return candidates
+
+
+def announcement_reference(url: str, label: str, seed: Page, source: dict, year: int) -> bool:
+    if not (trusted_host(url, source) or edition_scope(url, seed.final_url)):
+        return False
+    reference = urllib.parse.unquote(f"{url} {label}")
+    if re.search(r"\.(?:pdf|jpg|png|zip|ics)(?:$|[?#])|\b(?:workshop|tutorial|sponsor)\b", reference, re.I):
+        return False
+    return relevant_reference(url, label, source, year) or bool(re.search(
+        r"\bnews\b|announcements?|future[-_ /]*(?:meetings?|editions?|conferences?)|"
+        r"next[-_ /]*(?:edition|conference)|upcoming[-_ /]*(?:events?|conferences?)", reference, re.I))
+
+
+def discover_announcements(seed: Page, source: dict, year: int, method: str,
+                           provenance: tuple[dict, ...] = ()) -> tuple[list[Candidate], list[str]]:
+    candidates = linked_homepages(seed, source, year, method, provenance)
+    errors, seen = [], {candidate_key(seed.final_url)}
+    count = 0
+    for url, label in extract_links(seed.document, seed.final_url):
+        key = candidate_key(url)
+        if key in seen or not announcement_reference(url, label, seed, source, year):
+            continue
+        # A direct homepage reference is already queued for verification.
+        if key in {candidate_key(item.url) for item in candidates}:
+            continue
+        seen.add(key)
+        count += 1
+        if count > MAX_ANNOUNCEMENT_PAGES:
+            break
+        try:
+            page = fetch(url, timeout=15)
+            if not (same_site(page.final_url, url) and
+                    (trusted_host(page.final_url, source) or edition_scope(page.final_url, seed.final_url))):
+                raise RuntimeError("announcement redirected outside its official source")
+            if SOFT_ERROR.search(plain_text(page.document)):
+                raise RuntimeError("announcement is an error page")
+            proof = {"url": seed.final_url, "method": method, "target_url": url, "evidence": label[:600]}
+            candidates.extend(linked_homepages(page, source, year, "official_announcement_link", (*provenance, proof)))
+        except Exception as exc:
+            errors.append(f"{url}: {exc}")
+    return candidates, errors
 
 
 def formatted_candidate(source: dict, year: int) -> str:
@@ -366,7 +601,7 @@ def candidate_key(url: str) -> str:
 
 
 def probable_homepage_reference(url: str, label: str, source: dict, year: int) -> bool:
-    if not relevant_reference(url, label, source, year):
+    if safe_path(url) is None or submission_portal(url) or not relevant_reference(url, label, source, year):
         return False
     parsed = urllib.parse.urlparse(url)
     path = urllib.parse.unquote(parsed.path).strip("/")
@@ -387,25 +622,82 @@ def probable_homepage_reference(url: str, label: str, source: dict, year: int) -
         re.I,
     ):
         return True
-    return identity_year_match(final_segment, source, year)
+    return identity_year_match(final_segment, source, year) or identity_year_match(label, source, year)
 
 
-def unique_candidates(candidates: Iterable[Candidate]) -> list[Candidate]:
+def clear_homepage_endorsement(candidate: Candidate, source: dict | None, year: int | None) -> bool:
+    """An edition label alone also occurs on blog categories and account pages."""
+    if candidate.method in {"configured_pattern", "last_verified", "previous_edition_update",
+                            "previous_edition_redirect", "official_hub_redirect"}:
+        return True
+    proof = candidate.provenance[-1] if candidate.provenance else {}
+    evidence = proof.get("evidence") or ""
+    label = proof.get("link_label", evidence)
+    website = r"\b(?:official (?:site|website)|(?:conference )?(?:website|homepage))\b"
+    if re.search(website, label, re.I):
+        return True
+    # A local announcement may put 'official website' around a 'click here'
+    # link. Its wording must not promote an unrelated navigation label.
+    generic_link = bool(re.fullmatch(r"(?:click |visit |go )?here|link|this site", label.strip(), re.I))
+    if (generic_link or label.strip() == candidate.url) and re.search(website, evidence, re.I):
+        return True
+    path = safe_path(candidate.url)
+    if path is None or not source or not year:
+        return False
+    # Recognize plain edition roots such as /2027 or /Conferences/2027,
+    # including older official editions used to bootstrap a new website.
+    edition_paths = {str(year), f"conference {year}", f"conferences {year}"}
+    for alias in aliases_for(source):
+        name = normalize_words(alias)
+        edition_paths.update({f"{name} {year}", f"{name}{year}", f"{name} {str(year)[-2:]}", f"{year} {name}"})
+    root_home = path.lower() in {"", "/index.html", "/index.htm"} or normalize_words(path) in edition_paths
+    if candidate.method in {"official_sitemap", "official_search_result"}:
+        label = candidate.url
+    return root_home and identity_year_match(label, source, year)
+
+
+def unique_candidates(candidates: Iterable[Candidate], source: dict | None = None,
+                      year: int | None = None) -> list[Candidate]:
+    priority = {
+        "last_verified": 2,
+        "official_hub_link": 1,
+        "previous_edition_link": 1,
+        "previous_edition_update": 1,
+        "previous_edition_redirect": 1,
+        "official_hub_redirect": 1,
+        "official_announcement_link": 1,
+        "official_search_link": 1,
+        # A bare organizer event listing is useful as a fallback, but must not
+        # replace a working dedicated site without a fresh official link.
+        "official_search_result": 6,
+        "configured_pattern": 3,
+        "official_sitemap": 4,
+    }
+    pattern = formatted_candidate(source, year) if source and year else None
+
+    def ordering(item: Candidate) -> int:
+        rank = priority.get(item.method, 9)
+        if not clear_homepage_endorsement(item, source, year):
+            # Keep weak leads for diagnostics, without letting a weak duplicate
+            # displace a known canonical candidate and its stronger provenance.
+            rank = 7
+        if pattern and candidate_key(item.url) != candidate_key(pattern) and edition_scope(pattern, item.url):
+            rank = max(rank, 4)  # Prefer the edition path over its yearless hub.
+        listing = bool(pattern and not same_site(pattern, source["series_url"])
+                       and same_site(item.url, source["series_url"]))
+        # Dedicated verified sites beat organizer listings, but an arbitrary
+        # external page must not get that preference merely for changing host.
+        return max(rank, 5) if listing else rank
+
     seen: set[str] = set()
     result = []
-    for candidate in candidates:
+    # Sort before deduplication so fresh corroboration replaces a cached record
+    # of the same URL, including its stronger provenance.
+    for candidate in sorted(candidates, key=ordering):
         key = candidate_key(candidate.url)
-        if key in seen:
-            continue
-        seen.add(key)
-        result.append(candidate)
-    priority = {
-        "last_verified": 0,
-        "official_hub_link": 1,
-        "configured_pattern": 2,
-        "official_sitemap": 3,
-    }
-    result.sort(key=lambda item: priority.get(item.method, 9))
+        if key not in seen and safe_path(candidate.url) is not None and not submission_portal(candidate.url):
+            seen.add(key)
+            result.append(candidate)
     return result[:MAX_CANDIDATES]
 
 
@@ -439,6 +731,8 @@ def discover_from_sitemaps(seed_page: Page, source: dict, year: int) -> list[Can
             page = fetch(sitemap_url, timeout=15)
         except Exception:
             continue
+        if not trusted_host(page.final_url, source):
+            continue
         locations = [
             html.unescape(value.strip())
             for value in re.findall(r"<loc\b[^>]*>(.*?)</loc>", page.document, re.I | re.S)
@@ -448,7 +742,8 @@ def discover_from_sitemaps(seed_page: Page, source: dict, year: int) -> list[Can
                 if len(queue) + len(seen) < MAX_SITEMAPS:
                     queue.append((location, 1))
             elif probable_homepage_reference(location, "", source, year):
-                candidates.append(Candidate(location, sitemap_url, "official_sitemap"))
+                candidates.append(Candidate(location, page.final_url, "official_sitemap",
+                                            ({"url": page.final_url, "method": "official_sitemap", "target_url": location},)))
     return candidates
 
 
@@ -456,37 +751,184 @@ def discovery_candidates(source: dict, year: int, prior: dict) -> tuple[list[Can
     candidates: list[Candidate] = []
     errors: list[str] = []
     if prior.get("year") == year and prior.get("official_url"):
-        candidates.append(Candidate(prior["official_url"], prior.get("discovered_from") or source["series_url"], "last_verified"))
+        candidates.append(Candidate(prior["official_url"], prior.get("discovered_from") or source["series_url"], "last_verified",
+                                    tuple(prior.get("provenance") or [])))
     pattern_candidate = formatted_candidate(source, year)
     if trusted_host(pattern_candidate, source):
-        candidates.append(Candidate(pattern_candidate, source["series_url"], "configured_pattern"))
+        candidates.append(Candidate(pattern_candidate, source["series_url"], "configured_pattern",
+                                    ({"url": source["series_url"], "method": "configured_pattern", "target_url": pattern_candidate},)))
 
-    for seed_url in [source["series_url"], *(source.get("discovery_urls") or [])]:
+    seeds = [(url, None) for url in [source["series_url"], *(source.get("discovery_urls") or [])]]
+    seeds.extend((item["official_url"], item) for item in official_history(prior))
+    seen = set()
+    bootstrap_attempted = False
+    for seed_url, history in seeds:
+        if submission_portal(seed_url):
+            errors.append(f"{seed_url}: submission portal is not an edition homepage")
+            continue
+        if safe_path(seed_url) is None:
+            errors.append(f"{seed_url}: ambiguous official source path")
+            continue
+        if candidate_key(seed_url) in seen:
+            continue
+        seen.add(candidate_key(seed_url))
         try:
             seed_page = fetch(seed_url)
         except Exception as exc:
             errors.append(f"{seed_url}: {exc}")
             continue
-        if not trusted_host(seed_page.final_url, source):
+        if submission_portal(seed_page.final_url):
+            errors.append(f"{seed_url}: official source redirected to a submission portal")
+            continue
+        if any(safe_path(url) is None for url in [seed_page.final_url, *seed_page.redirects]):
+            errors.append(f"{seed_url}: official source redirected through an ambiguous path")
+            continue
+        if not edition_scope(seed_page.final_url, seed_url):
+            # A configured official source or a previously verified homepage
+            # can announce migration with an HTTP redirect. Guessed URL patterns
+            # and search hits do not get this authority.
+            current, _ = validate_official_page(seed_page.document, source, year)
+            if current:
+                method = "previous_edition_redirect" if history else "official_hub_redirect"
+                proof = {"url": seed_url, "method": method, "target_url": seed_page.final_url,
+                         "redirects": list(seed_page.redirects) or [seed_page.final_url],
+                         "evidence": page_title(seed_page.document) or page_primary_heading(seed_page.document)}
+                candidates.append(Candidate(seed_page.final_url, seed_url, method,
+                                            (*tuple((history or {}).get("provenance") or []), proof)[-8:]))
+                continue
+        if not trusted_host(seed_page.final_url, source) and not (
+                history and same_site(seed_page.final_url, seed_url) and edition_scope(seed_page.final_url, seed_url)):
             errors.append(f"{seed_url}: official hub redirected to an untrusted host")
             continue
-        for url, label in extract_links(seed_page.document, seed_page.final_url):
-            if probable_homepage_reference(url, label, source, year):
-                candidates.append(Candidate(url, seed_page.final_url, "official_hub_link"))
-        candidates.extend(discover_from_sitemaps(seed_page, source, year))
-    result = unique_candidates(candidates)
-    # A society event listing must not pin the calendar after a dedicated
-    # edition website becomes available on the configured official host.
-    if normalized_host(pattern_candidate) != normalized_host(source["series_url"]):
-        result.sort(key=lambda item: normalized_host(item.url) == normalized_host(source["series_url"]))
-    return result, errors
+        if history:
+            current, _ = validate_official_page(seed_page.document, source, year)
+            if current and history["year"] != year:
+                proof = {"url": seed_url, "method": "previous_edition_update", "target_url": seed_page.final_url,
+                         "evidence": page_title(seed_page.document) or page_primary_heading(seed_page.document)}
+                candidates.append(Candidate(seed_page.final_url, seed_url, "previous_edition_update",
+                                            (*tuple(history.get("provenance") or []), proof)[-8:]))
+            valid, reason = validate_official_page(seed_page.document, source, year if current else history["year"])
+            if not valid:
+                errors.append(f"{seed_url}: prior edition identity no longer verified: {reason}")
+                continue
+        method = "previous_edition_link" if history else "official_hub_link"
+        provenance = tuple((history or {}).get("provenance") or [])
+        discovered, announcement_errors = discover_announcements(seed_page, source, year, method, provenance)
+        candidates.extend(discovered)
+        errors.extend(announcement_errors)
+        if not history:
+            candidates.extend(discover_from_sitemaps(seed_page, source, year))
+            if not bootstrap_attempted:
+                previous_year = year - (2 if source["year_rule"] in {"even_next", "odd_next"} else 1)
+                previous_candidates = linked_homepages(seed_page, source, previous_year, "official_hub_link")
+                if previous_candidates:
+                    bootstrap_attempted = True
+                    previous = previous_candidates[0]
+                    previous_page, error = verify_candidate(previous, source, previous_year)
+                    if previous_page:
+                        found, found_errors = discover_announcements(previous_page, source, year,
+                                                                     "previous_edition_link", previous.provenance)
+                        candidates.extend(found)
+                        errors.extend(found_errors)
+                    else:
+                        errors.append(f"{previous.url}: previous edition bootstrap failed: {error}")
+    return unique_candidates(candidates, source, year), errors
+
+
+def search_discovery_candidates(source: dict, year: int, prior: dict | None = None) -> tuple[list[Candidate], list[str], list[dict], list[dict]]:
+    """Search provides leads; only known organizers can corroborate a new host."""
+    base_query = f"{source['title']} {year} official conference"
+    history = official_history(prior or {})
+    hosts = list(dict.fromkeys([normalized_host(source["series_url"]),
+                               *(normalized_host(item["official_url"]) for item in history),
+                               *(source.get("trusted_hosts") or [])]))[:3]
+    queries = [base_query, f"{base_query} ({' OR '.join('site:' + host for host in hosts)})"]
+    candidates, errors, attempts, unverified = [], [], [], []
+    visited, fetched = set(), 0
+    checked_history = {}
+    for query in queries:
+        try:
+            urls, diagnostics = search_web(query, fetch)
+        except Exception as exc:
+            urls, diagnostics = [], [{"provider": "search", "status": "error", "error": str(exc)[:200]}]
+        attempts.extend({**item, "query": query} for item in diagnostics)
+        for item in diagnostics:
+            if item.get("status") in {"error", "blocked", "unavailable"}:
+                errors.append(f"search {item.get('provider', '')}: {item.get('error') or item.get('status')}")
+        for url in urls[:MAX_UNVERIFIED]:
+            key = candidate_key(url)
+            if key in visited:
+                continue
+            visited.add(key)
+            if submission_portal(url):
+                continue
+            inherited = next((item for item in history if edition_scope(url, item["official_url"])), None)
+            proof = ()
+            if not trusted_host(url, source) and inherited:
+                history_url = inherited["official_url"]
+                if history_url not in checked_history:
+                    try:
+                        old_page = fetch(history_url, timeout=15)
+                        valid, reason = validate_official_page(old_page.document, source, inherited["year"])
+                        if not valid or not edition_scope(old_page.final_url, history_url):
+                            raise RuntimeError(reason if not valid else "previous edition moved outside its verified scope")
+                        checked_history[history_url] = True
+                    except Exception as exc:
+                        checked_history[history_url] = False
+                        errors.append(f"{history_url}: search history recheck: {exc}")
+                if checked_history[history_url]:
+                    proof = (*tuple(inherited.get("provenance") or []),
+                             {"url": history_url, "method": "previous_edition_search", "target_url": url, "query": query})
+                else:
+                    inherited = None
+            if not trusted_host(url, source) and not inherited:
+                unverified.append({"url": url, "discovered_from": query,
+                                   "reason": "search result has no verified official-source reference"})
+                continue
+            if fetched >= MAX_SEARCH_SOURCES:
+                continue
+            fetched += 1
+            try:
+                page = fetch(url, timeout=15)
+                if submission_portal(page.final_url):
+                    raise RuntimeError("search source redirected to a submission portal")
+                if not trusted_host(page.final_url, source) and not (
+                        inherited and same_site(page.final_url, url) and edition_scope(page.final_url, inherited["official_url"])):
+                    raise RuntimeError("search source redirected to an untrusted host")
+                if SOFT_ERROR.search(plain_text(page.document)):
+                    raise RuntimeError("search source is an error page")
+                if not proof:
+                    proof = ({"url": page.final_url, "method": "trusted_organizer_search", "query": query},)
+                valid, _ = validate_official_page(page.document, source, year)
+                if valid:
+                    candidates.append(Candidate(page.final_url, page.final_url, "official_search_result", proof))
+                found, found_errors = discover_announcements(page, source, year, "official_search_link", proof)
+                candidates.extend(found)
+                errors.extend(found_errors)
+            except Exception as exc:
+                errors.append(f"{url}: {exc}")
+    return unique_candidates(candidates, source, year), errors, attempts[:6], unverified[:MAX_UNVERIFIED]
 
 
 def verify_candidate(candidate: Candidate, source: dict, year: int) -> tuple[Page | None, str]:
+    if submission_portal(candidate.url):
+        return None, "submission portal is not an edition homepage"
+    if safe_path(candidate.url) is None:
+        return None, "ambiguous homepage path"
+    if not clear_homepage_endorsement(candidate, source, year):
+        return None, "edition link does not establish a conference homepage"
     try:
         page = fetch(candidate.url)
     except Exception as exc:
         return None, str(exc)
+    if submission_portal(page.final_url):
+        return None, "homepage redirected to a submission portal"
+    if any(safe_path(url) is None for url in [page.final_url, *page.redirects]):
+        return None, "homepage redirected through an ambiguous path"
+    if not same_site(page.final_url, candidate.url):
+        return None, "homepage redirected to an uncorroborated host"
+    if not edition_scope(page.final_url, candidate.url) and candidate_key(page.final_url) != candidate_key(candidate.url):
+        return None, "homepage redirected outside the discovered edition path"
     valid, reason = validate_official_page(page.document, source, year)
     if valid:
         return page, ""
@@ -634,18 +1076,13 @@ def extract_deadlines(document: str, expected_year: int) -> dict[str, str]:
 
 
 def deadline_reference(url: str, label: str, home: Page, source: dict, year: int) -> bool:
+    if safe_path(url) is None or safe_path(home.final_url) is None:
+        return False
     if normalized_host(url) != normalized_host(home.final_url):
         if not trusted_host(url, source) or not identity_year_match(f"{url} {label}", source, year):
             return False
     parsed = urllib.parse.urlparse(url)
-    home_path = urllib.parse.urlparse(home.final_url).path.rstrip("/")
-    if re.search(r"/index\.html?$", home_path, re.I):
-        home_path = home_path.rsplit("/", 1)[0]
-    same_host = normalized_host(url) == normalized_host(home.final_url)
-    scoped = same_host and (
-        (bool(home_path) and parsed.path.startswith(home_path + "/"))
-        or (not home_path and normalized_host(home.final_url) == normalized_host(formatted_candidate(source, year)))
-    )
+    scoped = edition_scope(url, home.final_url)
     if not scoped and not identity_year_match(f"{url} {label}", source, year):
         return False
     reference = urllib.parse.unquote(f"{parsed.path} {parsed.query} {label}")
@@ -673,11 +1110,15 @@ def deadline_pages(home: Page, source: dict, year: int) -> tuple[list[Page], lis
             page = fetch(url)
             if not deadline_reference(page.final_url, label, home, source, year):
                 raise RuntimeError("deadline page redirected outside the target edition")
-            identity = f"{page_title(page.document)} {page_headings(page.document)}"
+            # Shared conference templates include navigation and hidden CSP
+            # test headings; neither describes the deadline page's identity.
+            headings = [value for value in page_headings(page.document).splitlines()
+                        if normalize_words(value) not in {"main navigation", "csp test"}]
+            identity = " ".join([page_title(page.document), *headings])
             declared_years = re.findall(r"(?<!\d)20\d{2}(?!\d)", identity)
             neutral_heading = set(normalize_words(re.sub(r"\b20\d{2}\b", "", identity)).split()) <= {
                 "important", "key", "dates", "date", "deadline", "deadlines", "call", "for",
-                "papers", "paper", "submission", "submissions", "main", "track", "cfp",
+                "papers", "paper", "submission", "submissions", "main", "track", "cfp", "and",
             }
             wrong_identity = declared_years and (
                 str(year) not in declared_years or (not neutral_heading and not identity_year_match(identity, source, year))
@@ -1037,15 +1478,29 @@ def merge_deadlines(source: dict, prior: dict, year: int, pages: list[Page], now
 def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict]:
     year = refresh_year(source, prior, now)
     same_prior = prior if prior.get("year") == year else {}
-    candidates, errors = discovery_candidates(source, year, same_prior)
+    if submission_portal(same_prior.get("official_url") or ""):
+        # A rejected homepage must not reappear through failure retention. Its
+        # independently stored deadline evidence remains usable.
+        same_prior = {**same_prior, "official_url": None, "verified_at": None,
+                      "discovered_from": None, "discovery_method": None, "provenance": []}
+    candidates, errors = discovery_candidates(source, year, prior)
+    # Each scheduled check searches even when the cached homepage still works:
+    # organizers can announce a replacement before taking the old site down.
+    search_candidates, search_errors, search_attempts, unverified = search_discovery_candidates(source, year, prior)
+    errors.extend(search_errors)
+    candidates = unique_candidates([*candidates, *search_candidates], source, year)
     verified_page: Page | None = None
     verified_candidate: Candidate | None = None
+    attempted = set()
     for candidate in candidates:
+        attempted.add(candidate_key(candidate.url))
         page, error = verify_candidate(candidate, source, year)
         if page:
             verified_page, verified_candidate = page, candidate
             break
         errors.append(f"{candidate.url}: {error}")
+        if candidate.method not in {"configured_pattern", "last_verified"}:
+            unverified.append({"url": candidate.url, "discovered_from": candidate.discovered_from, "reason": error})
 
     pages = []
     if verified_page:
@@ -1060,6 +1515,7 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
         official_url = verified_page.final_url
         discovered_from = verified_candidate.discovered_from
         discovery_method = verified_candidate.method
+        provenance = list(verified_candidate.provenance)
         verified_at = now.isoformat()
         status = "verified"
         extracted_location = extract_location(verified_page.document, year, source)
@@ -1067,9 +1523,25 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
         official_url = same_prior.get("official_url")
         discovered_from = same_prior.get("discovered_from")
         discovery_method = same_prior.get("discovery_method")
+        provenance = same_prior.get("provenance") or []
         verified_at = same_prior.get("verified_at")
         status = "retained" if official_url else "awaiting_official_page"
         extracted_location = None
+
+    search_statuses = {item.get("status") for item in search_attempts}
+    search_failed = bool(search_statuses & {"error", "blocked", "unavailable"})
+    search_completed = bool(search_statuses & {"ok", "success", "empty", "irrelevant_results", "completed"})
+    search_status = ("not_needed" if not search_attempts else "partial" if search_failed and search_completed
+                     else "unavailable" if search_failed else "completed")
+    discovery_status = ("verified" if verified_page else "retained" if official_url
+                        else "unverified_candidates" if unverified
+                        else "search_unavailable" if search_status == "unavailable" else "not_found")
+    history_record = {"year": year, "official_url": official_url, "verified_at": verified_at,
+                      "discovered_from": discovered_from, "discovery_method": discovery_method,
+                      "provenance": provenance, "official_history": official_history(prior)}
+    history = official_history(history_record)
+    unverified = list({candidate_key(item["url"]): item for item in unverified
+                       if not official_url or candidate_key(item["url"]) != candidate_key(official_url)}.values())[:MAX_UNVERIFIED]
 
     location_source_url = official_url
     if not extracted_location:
@@ -1099,6 +1571,7 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
         "link": display_url,
         "link_kind": "edition" if official_url else "series",
         "official_page_announced": bool(official_url),
+        "discovery_status": discovery_status,
         "timeline": timeline,
         "timezone": timezone_name,
         "deadline_source_url": deadline_source_url,
@@ -1108,7 +1581,7 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
         "place_status": (
             "verified"
             if place != "TBD"
-            else ("not_detected" if official_url else "not_announced")
+            else "not_detected"
         ),
         "location_source_url": location.get("source_url") if isinstance(location, dict) else None,
     }
@@ -1133,6 +1606,13 @@ def refresh_source(source: dict, prior: dict, now: datetime) -> tuple[dict, dict
         "error": "; ".join(errors[:8]) or None,
         "discovered_from": discovered_from,
         "discovery_method": discovery_method,
+        "discovery_status": discovery_status,
+        "discovery_details": {"checked_at": now.isoformat(), "search_status": search_status,
+                              "candidate_count": len(attempted)},
+        "search_attempts": search_attempts,
+        "unverified_candidates": unverified[:MAX_UNVERIFIED],
+        "official_history": history,
+        "provenance": provenance,
         "verified_at": verified_at,
         "deadlines": deadlines,
         "deadline_evidence": deadline_evidence,

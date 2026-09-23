@@ -116,7 +116,7 @@
   series_url: https://signalprocessingsociety.org/events/conferences
   discovery_urls:
     - https://signalprocessingsociety.org/events/attend-an-event
-  trusted_hosts: [signalprocessingsociety.org, ieeeicme.org]
+  trusted_hosts: [signalprocessingsociety.org, ieeeicme.org, ieee-cas.org]
   url: https://{year}.ieeeicme.org/
 - slug: icml
   title: ICML

@@ -140,17 +140,23 @@
     const urgencyStyle = color === null ? "" : ` style="--urgency-color:${color.color}"`;
     const countdownData = item.next.date ? ` data-deadline="${item.next.date.toISOString()}"` : "";
     const hasLocation = item.place && item.place !== "TBD";
-    const locationLabel = hasLocation ? item.place : (item.place_status === "not_detected" ? "Location not yet verified" : "Location not announced");
+    const locationLabel = hasLocation ? item.place : "Location not yet verified";
     const locationContent = `<svg class="location-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg><span>${escapeHtml(locationLabel)}</span>`;
     const location = `<p class="location">${locationContent}</p>`;
     const officialHref = hasLocation && item.location_source_url ? item.location_source_url : item.link;
     const linkLabel = item.link_kind === "edition" ? "Official site ↗" : "Official series ↗";
     const deadlineLink = item.next.date && item.deadline_source_url ? `<a href="${escapeHtml(item.deadline_source_url)}" target="_blank" rel="noreferrer">Deadline source ↗</a>` : "";
     const deadlineLabel = item.next.date ? `${item.next.type} deadline · Local time` : "Submission deadline";
-    const countdownText = item.next.date ? countdown(item.next.date) : (item.official_page_announced ? "Deadline not yet verified" : "Deadline not announced");
+    const countdownText = item.next.date ? countdown(item.next.date) : "Deadline not yet verified";
+    const discoveryLabel = {
+      unverified_candidates: "Official site awaiting verification",
+      search_unavailable: "Official site search temporarily unavailable",
+      not_found: "Official site not yet found"
+    }[item.discovery_status];
+    const detailText = item.next.date ? dateText : (discoveryLabel || "TBD");
     return `<article class="card ${item.past ? "inactive" : ""}${urgencyClass}"${urgencyStyle}>
       <div class="card-top"><div class="venue"><h2>${escapeHtml(item.title)} <small>${item.year}</small></h2><p>${escapeHtml(item.venueDescription)}</p>${location}</div></div>
-      <div class="deadline"><small>${escapeHtml(deadlineLabel)}</small><div class="countdown"${countdownData}>${escapeHtml(countdownText)}</div><time class="deadline-date"${item.next.date ? ` datetime="${item.next.date.toISOString()}"` : ""}>${escapeHtml(dateText)}</time></div>
+      <div class="deadline"><small>${escapeHtml(deadlineLabel)}</small><div class="countdown"${countdownData}>${escapeHtml(countdownText)}</div><time class="deadline-date"${item.next.date ? ` datetime="${item.next.date.toISOString()}"` : ""}>${escapeHtml(detailText)}</time></div>
       <div class="card-bottom"><span class="rank ${escapeHtml(item.ccfRank)}">CCF ${escapeHtml(item.ccfRank)}</span><div class="links">${deadlineLink}<a href="${escapeHtml(officialHref)}" target="_blank" rel="noreferrer">${linkLabel}</a></div></div>
     </article>`;
   }

@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-09-23T05:06:00.429973+00:00",
+  "updated_at": "2026-09-23T06:30:46.252926+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -15,6 +15,7 @@ window.AI_CONFERENCES = {
           "link": "https://aaai.org/conference/aaai/aaai-27/",
           "link_kind": "edition",
           "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [
             {
               "deadline": "2026-07-28 23:59:00",
@@ -50,6 +51,7 @@ window.AI_CONFERENCES = {
           "link": "https://www.acmmm.org/",
           "link_kind": "series",
           "official_page_announced": false,
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -80,13 +82,14 @@ window.AI_CONFERENCES = {
           "link": "https://www.bmva.org/bmvc",
           "link_kind": "series",
           "official_page_announced": false,
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
           "deadline_status": "not_detected",
           "date": "TBD",
           "place": "TBD",
-          "place_status": "not_announced",
+          "place_status": "not_detected",
           "location_source_url": null
         }
       ],
@@ -110,6 +113,7 @@ window.AI_CONFERENCES = {
           "link": "https://cvpr.thecvf.com/Conferences/2027",
           "link_kind": "edition",
           "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [
             {
               "deadline": "2026-11-16 23:59:59",
@@ -118,7 +122,7 @@ window.AI_CONFERENCES = {
           ],
           "timezone": "UTC-12",
           "deadline_source_url": "https://cvpr.thecvf.com/Conferences/2027/Dates",
-          "deadline_status": "retained",
+          "deadline_status": "verified",
           "date": "TBD",
           "place": "Seattle WA",
           "place_status": "verified",
@@ -145,13 +149,14 @@ window.AI_CONFERENCES = {
           "link": "https://www.eurai.org/ecai",
           "link_kind": "series",
           "official_page_announced": false,
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
           "deadline_status": "not_detected",
           "date": "TBD",
           "place": "TBD",
-          "place_status": "not_announced",
+          "place_status": "not_detected",
           "location_source_url": null
         }
       ],
@@ -175,13 +180,14 @@ window.AI_CONFERENCES = {
           "link": "https://eccv.ecva.net/",
           "link_kind": "series",
           "official_page_announced": false,
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
           "deadline_status": "not_detected",
           "date": "TBD",
           "place": "TBD",
-          "place_status": "not_announced",
+          "place_status": "not_detected",
           "location_source_url": null
         }
       ],
@@ -205,6 +211,7 @@ window.AI_CONFERENCES = {
           "link": "https://2027.ieeeicassp.org/",
           "link_kind": "edition",
           "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [
             {
               "deadline": "2026-09-23 23:59:59"
@@ -239,6 +246,7 @@ window.AI_CONFERENCES = {
           "link": "https://iccv.thecvf.com/Conferences/2027",
           "link_kind": "edition",
           "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -269,6 +277,7 @@ window.AI_CONFERENCES = {
           "link": "https://2027.ieeeicip.org/",
           "link_kind": "edition",
           "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -299,6 +308,7 @@ window.AI_CONFERENCES = {
           "link": "https://iclr.cc/Conferences/2027",
           "link_kind": "edition",
           "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [
             {
               "deadline": "2026-09-25 23:59:59",
@@ -306,7 +316,7 @@ window.AI_CONFERENCES = {
             }
           ],
           "timezone": "UTC-12",
-          "deadline_source_url": "https://iclr.cc/Conferences/2027/CallForPapers",
+          "deadline_source_url": "https://iclr.cc/Conferences/2027/Dates",
           "deadline_status": "verified",
           "date": "TBD",
           "place": "California",
@@ -334,13 +344,14 @@ window.AI_CONFERENCES = {
           "link": "https://signalprocessingsociety.org/events/conferences",
           "link_kind": "series",
           "official_page_announced": false,
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
           "deadline_status": "not_detected",
           "date": "TBD",
           "place": "TBD",
-          "place_status": "not_announced",
+          "place_status": "not_detected",
           "location_source_url": null
         }
       ],
@@ -364,6 +375,7 @@ window.AI_CONFERENCES = {
           "link": "https://icml.cc/",
           "link_kind": "series",
           "official_page_announced": false,
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -394,6 +406,7 @@ window.AI_CONFERENCES = {
           "link": "https://www.ijcai.org/",
           "link_kind": "series",
           "official_page_announced": false,
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -424,6 +437,7 @@ window.AI_CONFERENCES = {
           "link": "https://neurips.cc/",
           "link_kind": "series",
           "official_page_announced": false,
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -451,9 +465,10 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "wacv27",
-          "link": "https://wacv.thecvf.com/",
+          "link": "https://wacv.thecvf.com/Conferences/2027",
           "link_kind": "edition",
           "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [
             {
               "deadline": "2026-08-28 23:59:59",
@@ -461,16 +476,16 @@ window.AI_CONFERENCES = {
             }
           ],
           "timezone": "UTC-12",
-          "deadline_source_url": "https://wacv.thecvf.com/Conferences/2027/CallForPapers",
-          "deadline_status": "partial",
+          "deadline_source_url": "https://wacv.thecvf.com/Conferences/2027/Dates",
+          "deadline_status": "verified",
           "date": "TBD",
           "place": "Disney Springs, Buena Vista, FL",
           "place_status": "verified",
-          "location_source_url": "https://wacv.thecvf.com/"
+          "location_source_url": "https://wacv.thecvf.com/Conferences/2027"
         }
       ],
-      "latest_link": "https://wacv.thecvf.com/",
-      "official_url": "https://wacv.thecvf.com/",
+      "latest_link": "https://wacv.thecvf.com/Conferences/2027",
+      "official_url": "https://wacv.thecvf.com/Conferences/2027",
       "series_url": "https://wacv.thecvf.com/",
       "next_year": 2027,
       "source_category": "official",

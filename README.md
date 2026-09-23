@@ -25,8 +25,14 @@ Then open <http://localhost:8080>.
 `data/official_sources.yml`. It then:
 
 - probes known URL patterns without assuming that a future page already exists;
-- discovers target-year links from official hubs and their sitemaps;
-- accepts an edition page only after HTTP success and a venue + year identity check;
+- discovers target-year links from official hubs, announcement pages, sitemaps,
+  and previously verified editions, including links to new domains;
+- remembers a bounded history of verified edition URLs across year changes;
+- searches for the conference name and year through public DuckDuckGo Lite and
+  Brave results on every daily check, even while the cached homepage still works,
+  so newly corroborated replacement sites can take precedence;
+- treats search hits as candidates only: new domains need a link from an official
+  organizer or previously verified edition, plus a venue + year identity check;
 - follows a bounded set of trusted, target-edition Dates and Call for Papers pages;
 - reads official UTC countdowns and labelled submission dates, preserving their
   time zones and source evidence;
@@ -42,9 +48,10 @@ GitHub Actions runs this refresh once every 24 hours, scheduled for 21:17 UTC
 `main` and manual workflow runs also refresh and deploy the site. The site remains
 a static snapshot, checks for a new snapshot when opened or revisited, and reloads
 it every 15 minutes while left open. These browser checks do not scrape conference
-websites. An
-unannounced edition links to its official series hub instead of a guessed or
-broken future URL.
+websites. An edition without a verified homepage links to its official series hub.
+The page distinguishes an unfound homepage, an unverified candidate, and a
+temporarily unavailable search. A failed lookup does not establish that a
+conference has not announced its details.
 
 Accepted deadlines and locations store their official source URLs and extraction
 evidence in `data/refresh_state.json`. The workflow summary lists the results for
@@ -52,6 +59,12 @@ each conference so a successful deployment can be distinguished from missing dat
 Each successful check saves its snapshot and check time to the repository, including
 days without changed deadlines, keeping the scheduled repository active.
 The generated `data/conferences.js` contains only the display snapshot.
+
+Discovery provenance, official URL history, search attempts, and unverified
+candidates are saved in the refresh state. Public search requires no API key,
+but providers may rate-limit or change their result pages. Such failures are
+recorded and retried by the next daily check; existing verified data is retained.
+Search snippets and self-described official sites are never used as sole proof.
 
 Run the offline parser regression tests with:
 

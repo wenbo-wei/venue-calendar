@@ -170,6 +170,26 @@ class DeadlineDiscoveryTests(unittest.TestCase):
         self.assertEqual(pages, [home])
         self.assertTrue(errors)
 
+    def test_dates_template_navigation_does_not_hide_valid_deadlines(self):
+        home = page('<h1>CVPR 2027</h1><a href="/Conferences/2027/Dates">Dates</a>')
+        document = ('<title>2027 Dates and Deadlines</title><h1>CSP Test</h1>'
+                    '<h2>Main Navigation</h2>'
+                    + countdown("submission_deadline_1", "2026/11/17 11:59:59"))
+        dates = page(document, HOME_URL + "/Dates")
+        with patch.object(refresh, "fetch", return_value=dates):
+            pages, errors = refresh.deadline_pages(home, SOURCE, 2027)
+        self.assertEqual(errors, [])
+        deadlines, evidence, status = refresh.merge_deadlines(SOURCE, {}, 2027, pages, NOW)
+        self.assertEqual(deadlines["deadline"], "2026-11-16 23:59:59")
+        self.assertEqual(status, "verified")
+        self.assertEqual(evidence["deadline"]["source_url"], dates.final_url)
+        for wrong in (document.replace("2027 Dates", "2026 Dates"),
+                      document + '<h1>ICCV 2027 Dates</h1>'):
+            with self.subTest(document=wrong), patch.object(refresh, "fetch", return_value=page(wrong, dates.final_url)):
+                pages, errors = refresh.deadline_pages(home, SOURCE, 2027)
+                self.assertEqual(pages, [home])
+                self.assertTrue(errors)
+
     def test_crawl_is_bounded_and_deduplicated(self):
         links = "".join(f'<a href="/Conferences/2027/Dates/{i}">Dates</a>' for i in range(20))
         home = page("<h1>CVPR 2027</h1>" + links)
@@ -233,7 +253,7 @@ class RefreshRetentionTests(unittest.TestCase):
         self.assertEqual(deadlines, prior["deadlines"])
         self.assertEqual(evidence["deadline"]["verified_at"], "earlier")
         self.assertEqual(status, "retained")
-        with patch.object(refresh, "discovery_candidates", return_value=([], ["network unavailable"])):
+        with patch.object(refresh, "discovery_candidates", return_value=([], ["network unavailable"])), patch.object(refresh, "search_web", return_value=([], [{"provider": "fixture", "status": "error", "error": "offline"}])):
             venue, state = refresh.refresh_source(SOURCE, prior, NOW)
         self.assertEqual(state["deadlines"], prior["deadlines"])
         self.assertEqual(venue["confs"][0]["deadline_source_url"], HOME_URL + "/Dates")
