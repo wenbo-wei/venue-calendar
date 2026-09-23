@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-23T05:01:46.780050+00:00",
+  "checked_at": "2026-09-23T05:06:00.429973+00:00",
   "changed": false,
   "venues": {
     "aaai": {
@@ -11,7 +11,7 @@
       "error": null,
       "discovered_from": "https://aaai.org/conference/aaai/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-23T05:01:46.780050+00:00",
+      "verified_at": "2026-09-23T05:06:00.429973+00:00",
       "deadlines": {
         "deadline": "2026-07-28 23:59:00",
         "abstract_deadline": "2026-07-21 23:59:00"
@@ -26,7 +26,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-          "verified_at": "2026-09-23T05:01:46.780050+00:00",
+          "verified_at": "2026-09-23T05:06:00.429973+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -38,7 +38,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-          "verified_at": "2026-09-23T05:01:46.780050+00:00",
+          "verified_at": "2026-09-23T05:06:00.429973+00:00",
           "status": "verified"
         }
       },
@@ -55,7 +55,7 @@
         "precision": "locality",
         "evidence": "February 16 – February 23, 2027 | Montréal, Canada",
         "source_url": "https://aaai.org/conference/aaai/aaai-27/",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -81,7 +81,7 @@
         "precision": "locality",
         "evidence": "ACM MM 2027 will be in Hong Kong. Dates to be announced.",
         "source_url": "https://www.acmmm.org/",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -112,7 +112,7 @@
       "error": "https://cvpr.thecvf.com/Conferences/2027/Dates: deadline page does not identify the target edition",
       "discovered_from": "https://cvpr.thecvf.com/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-23T05:01:46.780050+00:00",
+      "verified_at": "2026-09-23T05:06:00.429973+00:00",
       "deadlines": {
         "deadline": "2026-11-16 23:59:59",
         "abstract_deadline": "2026-11-10 23:59:59"
@@ -156,7 +156,7 @@
         "precision": "locality",
         "evidence": "Seattle WA",
         "source_url": "https://cvpr.thecvf.com/Conferences/2027",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -205,7 +205,7 @@
       "error": null,
       "discovered_from": "https://signalprocessingsociety.org/events/conferences",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-23T05:01:46.780050+00:00",
+      "verified_at": "2026-09-23T05:06:00.429973+00:00",
       "deadlines": {
         "deadline": "2026-09-23 23:59:59"
       },
@@ -219,7 +219,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "registry",
           "source_url": "https://2027.ieeeicassp.org/call-for-papers/",
-          "verified_at": "2026-09-23T05:01:46.780050+00:00",
+          "verified_at": "2026-09-23T05:06:00.429973+00:00",
           "status": "verified"
         }
       },
@@ -239,7 +239,7 @@
         "precision": "locality",
         "evidence": "16-21 May 2027, Toronto, Canada",
         "source_url": "https://2027.ieeeicassp.org/",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -252,7 +252,7 @@
       "error": "https://iccv.thecvf.com/Conferences/2027/Dates: deadline page does not identify the target edition",
       "discovered_from": "https://iccv.thecvf.com/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-23T05:01:46.780050+00:00",
+      "verified_at": "2026-09-23T05:06:00.429973+00:00",
       "deadlines": {},
       "deadline_evidence": {},
       "deadline_status": "not_detected",
@@ -267,7 +267,7 @@
         "precision": "locality",
         "evidence": "ICCV 2027 will be held at the Venue Coming Soon... in Hong Kong, CN October 2–8, 2027 .",
         "source_url": "https://iccv.thecvf.com/Conferences/2027",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -280,7 +280,7 @@
       "error": null,
       "discovered_from": "https://signalprocessingsociety.org/events/conferences",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-23T05:01:46.780050+00:00",
+      "verified_at": "2026-09-23T05:06:00.429973+00:00",
       "deadlines": {},
       "deadline_evidence": {},
       "deadline_status": "not_detected",
@@ -295,7 +295,7 @@
         "precision": "locality",
         "evidence": "29 November – 3 December 2027, Singapore",
         "source_url": "https://2027.ieeeicip.org/",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -308,7 +308,7 @@
       "error": "https://iclr.cc/Conferences/2027/Dates: deadline page does not identify the target edition",
       "discovered_from": "https://iclr.cc/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-23T05:01:46.780050+00:00",
+      "verified_at": "2026-09-23T05:06:00.429973+00:00",
       "deadlines": {
         "deadline": "2026-09-25 23:59:59",
         "abstract_deadline": "2026-09-18 23:59:59"
@@ -323,7 +323,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://iclr.cc/Conferences/2027/CallForPapers",
-          "verified_at": "2026-09-23T05:01:46.780050+00:00",
+          "verified_at": "2026-09-23T05:06:00.429973+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -335,7 +335,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://iclr.cc/Conferences/2027",
-          "verified_at": "2026-09-23T05:01:46.780050+00:00",
+          "verified_at": "2026-09-23T05:06:00.429973+00:00",
           "status": "verified"
         }
       },
@@ -352,7 +352,7 @@
         "precision": "locality",
         "evidence": "California",
         "source_url": "https://iclr.cc/Conferences/2027",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -396,7 +396,7 @@
         "precision": "region",
         "evidence": "2027 -- South America",
         "source_url": "https://icml.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -422,7 +422,7 @@
         "precision": "locality",
         "evidence": "IJCAI-27 will be held from August 7th until August 13, 2027 in Kyoto, Japan and from August 15th until August 17, 2027 in Hengqin, China. We are looking forward to welcoming you there.",
         "source_url": "https://www.ijcai.org/",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -448,7 +448,7 @@
         "precision": "region",
         "evidence": "2027 -- Europe",
         "source_url": "https://neurips.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     },
@@ -461,7 +461,7 @@
       "error": "https://wacv.thecvf.com/Conferences/2027/Dates: deadline page does not identify the target edition",
       "discovered_from": "https://wacv.thecvf.com/",
       "discovery_method": "last_verified",
-      "verified_at": "2026-09-23T05:01:46.780050+00:00",
+      "verified_at": "2026-09-23T05:06:00.429973+00:00",
       "deadlines": {
         "deadline": "2026-08-28 23:59:59",
         "abstract_deadline": "2026-08-21 23:59:59"
@@ -476,7 +476,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "registry",
           "source_url": "https://wacv.thecvf.com/Conferences/2027/CallForPapers",
-          "verified_at": "2026-09-23T05:01:46.780050+00:00",
+          "verified_at": "2026-09-23T05:06:00.429973+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -505,7 +505,7 @@
         "precision": "locality",
         "evidence": "Disney Springs, Buena Vista, FL | Monday, Jan 4 through Friday, Jan 8, 2027",
         "source_url": "https://wacv.thecvf.com/",
-        "verified_at": "2026-09-23T05:01:46.780050+00:00"
+        "verified_at": "2026-09-23T05:06:00.429973+00:00"
       },
       "pending_location": null
     }
