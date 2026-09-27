@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-09-26T23:39:30.721370+00:00",
+  "updated_at": "2026-09-27T23:49:53.745220+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -252,7 +252,7 @@ window.AI_CONFERENCES = {
           "deadline_source_url": null,
           "deadline_status": "not_detected",
           "date": "TBD",
-          "place": "Hong Kong, CN",
+          "place": "Hong Kong Convention and Expo Center",
           "place_status": "verified",
           "location_source_url": "https://iccv.thecvf.com/Conferences/2027"
         }
