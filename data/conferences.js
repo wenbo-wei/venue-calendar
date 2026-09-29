@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-09-27T23:49:53.745220+00:00",
+  "updated_at": "2026-09-29T01:01:47.552947+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -403,22 +403,27 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "ijcai27",
-          "link": "https://www.ijcai.org/",
-          "link_kind": "series",
-          "official_page_announced": false,
-          "discovery_status": "search_unavailable",
-          "timeline": [],
+          "link": "https://2027.ijcai.org/",
+          "link_kind": "edition",
+          "official_page_announced": true,
+          "discovery_status": "verified",
+          "timeline": [
+            {
+              "deadline": "2027-01-11 23:59:59",
+              "abstract_deadline": "2027-01-04 23:59:59"
+            }
+          ],
           "timezone": "UTC-12",
-          "deadline_source_url": null,
-          "deadline_status": "not_detected",
+          "deadline_source_url": "https://2027.ijcai.org/",
+          "deadline_status": "verified",
           "date": "TBD",
           "place": "Kyoto, Japan; Hengqin, China",
           "place_status": "verified",
           "location_source_url": "https://www.ijcai.org/"
         }
       ],
-      "latest_link": "https://www.ijcai.org/",
-      "official_url": null,
+      "latest_link": "https://2027.ijcai.org/",
+      "official_url": "https://2027.ijcai.org/",
       "series_url": "https://www.ijcai.org/",
       "next_year": 2027,
       "source_category": "official",
