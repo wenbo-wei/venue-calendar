@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-09-29T01:01:47.552947+00:00",
+  "updated_at": "2026-09-30T00:32:04.969324+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -221,7 +221,7 @@ window.AI_CONFERENCES = {
           "deadline_source_url": "https://2027.ieeeicassp.org/call-for-papers/",
           "deadline_status": "verified",
           "date": "TBD",
-          "place": "Toronto, Canada",
+          "place": "Visa Information",
           "place_status": "verified",
           "location_source_url": "https://2027.ieeeicassp.org/"
         }
