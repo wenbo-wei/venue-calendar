@@ -33,6 +33,15 @@
   series_url: https://www.bmva.org/bmvc
   trusted_hosts: [bmva.org]
   url: https://bmvc{year}.bmva.org/
+- slug: colm
+  title: COLM
+  description: Conference on Language Modeling
+  rank: N
+  year_rule: annual_next
+  aliases: [COLM, Conference on Language Modeling]
+  series_url: https://colm.cc/
+  trusted_hosts: [colm.cc, colmweb.org]
+  url: https://colm.cc/Conferences/{year}
 - slug: cvpr
   title: CVPR
   description: IEEE/CVF Conference on Computer Vision and Pattern Recognition

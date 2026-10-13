@@ -101,6 +101,37 @@ window.AI_CONFERENCES = {
       "source_slug": "bmvc"
     },
     {
+      "title": "COLM",
+      "description": "Conference on Language Modeling",
+      "rank": {
+        "ccf": "N"
+      },
+      "confs": [
+        {
+          "year": 2027,
+          "id": "colm27",
+          "link": "https://colm.cc/",
+          "link_kind": "series",
+          "official_page_announced": false,
+          "discovery_status": "unverified_candidates",
+          "timeline": [],
+          "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
+          "date": "TBD",
+          "place": "TBD",
+          "place_status": "not_detected",
+          "location_source_url": null
+        }
+      ],
+      "latest_link": "https://colm.cc/",
+      "official_url": null,
+      "series_url": "https://colm.cc/",
+      "next_year": 2027,
+      "source_category": "official",
+      "source_slug": "colm"
+    },
+    {
       "title": "CVPR",
       "description": "IEEE/CVF Conference on Computer Vision and Pattern Recognition",
       "rank": {

@@ -4,7 +4,7 @@ Venue Calendar is a focused tracker for research conference deadlines and select
 
 ## Scope
 
-- Conferences: CVPR, ICCV, ECCV, BMVC, WACV, ACM MM, ICASSP, ICIP, ICME, AAAI, IJCAI, ECAI, NeurIPS, ICML, and ICLR.
+- Conferences: CVPR, ICCV, ECCV, BMVC, WACV, ACM MM, ICASSP, ICIP, ICME, AAAI, IJCAI, ECAI, NeurIPS, ICML, ICLR, and COLM.
 - Journals: TPAMI, IJCV, Artificial Intelligence, and Pattern Recognition.
 - Deadlines are converted to the browser's local time zone.
 - Search, ranking filters, and countdowns run entirely in the browser.
