@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-10-13T02:36:05.611526+00:00",
+  "updated_at": "2026-10-13T08:22:08.479723+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -113,7 +113,7 @@ window.AI_CONFERENCES = {
           "link": "https://colm.cc/",
           "link_kind": "series",
           "official_page_announced": false,
-          "discovery_status": "unverified_candidates",
+          "discovery_status": "search_unavailable",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
