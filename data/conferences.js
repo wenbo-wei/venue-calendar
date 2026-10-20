@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-10-20T00:24:39.444354+00:00",
+  "updated_at": "2026-10-20T23:56:18.599832+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -51,7 +51,7 @@ window.AI_CONFERENCES = {
           "link": "https://www.acmmm.org/",
           "link_kind": "series",
           "official_page_announced": false,
-          "discovery_status": "search_unavailable",
+          "discovery_status": "unverified_candidates",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -372,22 +372,26 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "icme27",
-          "link": "https://signalprocessingsociety.org/events/conferences",
-          "link_kind": "series",
-          "official_page_announced": false,
-          "discovery_status": "search_unavailable",
-          "timeline": [],
+          "link": "https://2027.ieeeicme.org/",
+          "link_kind": "edition",
+          "official_page_announced": true,
+          "discovery_status": "verified",
+          "timeline": [
+            {
+              "deadline": "2026-11-27 11:59:00"
+            }
+          ],
           "timezone": "UTC-12",
-          "deadline_source_url": null,
-          "deadline_status": "not_detected",
+          "deadline_source_url": "https://2027.ieeeicme.org/about/important-dates",
+          "deadline_status": "verified",
           "date": "TBD",
-          "place": "TBD",
-          "place_status": "not_detected",
-          "location_source_url": null
+          "place": "The location of the conference",
+          "place_status": "verified",
+          "location_source_url": "https://2027.ieeeicme.org/"
         }
       ],
-      "latest_link": "https://signalprocessingsociety.org/events/conferences",
-      "official_url": null,
+      "latest_link": "https://2027.ieeeicme.org/",
+      "official_url": "https://2027.ieeeicme.org/",
       "series_url": "https://signalprocessingsociety.org/events/conferences",
       "next_year": 2027,
       "source_category": "official",
