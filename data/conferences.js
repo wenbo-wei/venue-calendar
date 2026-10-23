@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-10-22T00:01:36.017202+00:00",
+  "updated_at": "2026-10-23T00:00:06.770727+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -454,7 +454,7 @@ window.AI_CONFERENCES = {
           "date": "TBD",
           "place": "Kyoto, Japan; Hengqin, China",
           "place_status": "verified",
-          "location_source_url": "https://www.ijcai.org/"
+          "location_source_url": "https://ijcai.org/"
         }
       ],
       "latest_link": "https://2027.ijcai.org/",
