@@ -230,6 +230,37 @@ window.AI_CONFERENCES = {
       "source_slug": "eccv"
     },
     {
+      "title": "EMNLP",
+      "description": "Conference on Empirical Methods in Natural Language Processing",
+      "rank": {
+        "ccf": "B"
+      },
+      "confs": [
+        {
+          "year": 2027,
+          "id": "emnlp27",
+          "link": "https://sigdat.org/",
+          "link_kind": "series",
+          "official_page_announced": false,
+          "discovery_status": "unverified_candidates",
+          "timeline": [],
+          "timezone": "UTC-12",
+          "deadline_source_url": null,
+          "deadline_status": "not_detected",
+          "date": "TBD",
+          "place": "TBD",
+          "place_status": "not_detected",
+          "location_source_url": null
+        }
+      ],
+      "latest_link": "https://sigdat.org/",
+      "official_url": null,
+      "series_url": "https://sigdat.org/",
+      "next_year": 2027,
+      "source_category": "official",
+      "source_slug": "emnlp"
+    },
+    {
       "title": "ICASSP",
       "description": "IEEE International Conference on Acoustics, Speech, and Signal Processing",
       "rank": {

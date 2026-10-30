@@ -69,6 +69,15 @@
   series_url: https://eccv.ecva.net/
   trusted_hosts: [ecva.net]
   url: https://eccv.ecva.net/
+- slug: emnlp
+  title: EMNLP
+  description: Conference on Empirical Methods in Natural Language Processing
+  rank: B
+  year_rule: annual_next
+  aliases: [EMNLP, Empirical Methods in Natural Language Processing]
+  series_url: https://sigdat.org/
+  trusted_hosts: [sigdat.org, emnlp.org, aclweb.org]
+  url: https://{year}.emnlp.org/
 - slug: icassp
   title: ICASSP
   description: IEEE International Conference on Acoustics, Speech, and Signal Processing

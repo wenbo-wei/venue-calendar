@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-10-30T01:06:15.944944+00:00",
-  "changed": false,
+  "changed": true,
   "venues": {
     "aaai": {
       "url": "https://aaai.org/conference/aaai/aaai-27/",
@@ -1653,6 +1653,40 @@
         "source_url": "https://wacv.thecvf.com/Conferences/2027",
         "verified_at": "2026-10-30T01:06:15.944944+00:00"
       },
+      "pending_location": null
+    },
+    "emnlp": {
+      "url": "https://sigdat.org/",
+      "official_url": null,
+      "series_url": "https://sigdat.org/",
+      "year": 2027,
+      "status": "awaiting_official_page",
+      "error": "https://2027.emnlp.org/: DNS error: [Errno -2] Name or service not known; https://sigdat.org/: edition link does not establish a conference homepage",
+      "discovered_from": null,
+      "discovery_method": null,
+      "discovery_status": "unverified_candidates",
+      "discovery_details": {
+        "checked_at": "2026-10-30T07:19:32.513958+00:00",
+        "search_status": "not_needed",
+        "candidate_count": 2
+      },
+      "search_attempts": [],
+      "unverified_candidates": [
+        {
+          "url": "https://sigdat.org/",
+          "discovered_from": "https://sigdat.org/",
+          "reason": "edition link does not establish a conference homepage"
+        }
+      ],
+      "official_history": [],
+      "provenance": [],
+      "verified_at": null,
+      "deadlines": {},
+      "deadline_evidence": {},
+      "deadline_status": "not_detected",
+      "deadline_pages": [],
+      "timezone": "UTC-12",
+      "location": null,
       "pending_location": null
     }
   }
