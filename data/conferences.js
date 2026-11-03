@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-11-02T00:48:40.411611+00:00",
+  "updated_at": "2026-11-03T02:56:26.894945+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -438,10 +438,10 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "icml27",
-          "link": "https://icml.cc/",
-          "link_kind": "series",
-          "official_page_announced": false,
-          "discovery_status": "search_unavailable",
+          "link": "https://icml.cc/Conferences/2027",
+          "link_kind": "edition",
+          "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -452,8 +452,8 @@ window.AI_CONFERENCES = {
           "location_source_url": "https://icml.cc/Conferences/FutureMeetings"
         }
       ],
-      "latest_link": "https://icml.cc/",
-      "official_url": null,
+      "latest_link": "https://icml.cc/Conferences/2027",
+      "official_url": "https://icml.cc/Conferences/2027",
       "series_url": "https://icml.cc/",
       "next_year": 2027,
       "source_category": "official",
