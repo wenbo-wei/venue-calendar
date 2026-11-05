@@ -1,6 +1,6 @@
 {
-  "checked_at": "2026-11-04T01:26:37.287215+00:00",
-  "changed": true,
+  "checked_at": "2026-11-05T01:29:37.653266+00:00",
+  "changed": false,
   "venues": {
     "aaai": {
       "url": "https://aaai.org/conference/aaai/aaai-27/",
@@ -13,7 +13,7 @@
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
         "search_status": "partial",
         "candidate_count": 1
       },
@@ -47,12 +47,12 @@
           "reason": "search result has no verified official-source reference"
         },
         {
-          "url": "https://conventions.io/conference/aaai-27-conference-on-artificial-intelligence",
+          "url": "https://eventbrowse.com/event/aaai-27-41st-annual-aaai-conference-on-artificial-intelligence-2027/",
           "discovered_from": "AAAI 2027 official conference",
           "reason": "search result has no verified official-source reference"
         },
         {
-          "url": "https://www.beri.net/events/aaai-2027",
+          "url": "https://www.aiexpertmagazine.com/aaai-2027-41st-annual-aaai-conference-on-artificial-intelligence-everything-you-need-to-know-2/",
           "discovered_from": "AAAI 2027 official conference",
           "reason": "search result has no verified official-source reference"
         },
@@ -62,7 +62,12 @@
           "reason": "search result has no verified official-source reference"
         },
         {
-          "url": "https://eventbrowse.com/event/aaai-27-41st-annual-aaai-conference-on-artificial-intelligence-2027/",
+          "url": "https://aiwhatson.com/event/aaai-2027-aaai-conference-on-artificial-intelligence",
+          "discovered_from": "AAAI 2027 official conference",
+          "reason": "search result has no verified official-source reference"
+        },
+        {
+          "url": "https://conventions.io/conference/aaai-27-conference-on-artificial-intelligence",
           "discovered_from": "AAAI 2027 official conference",
           "reason": "search result has no verified official-source reference"
         }
@@ -71,7 +76,7 @@
         {
           "year": 2027,
           "official_url": "https://aaai.org/conference/aaai/aaai-27/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://aaai.org/conference/aaai/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -92,7 +97,7 @@
           "evidence": "Forty-first Conference on Artificial Intelligence"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {
         "deadline": "2026-07-28 23:59:00",
         "abstract_deadline": "2026-07-21 23:59:00"
@@ -107,7 +112,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -119,7 +124,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         }
       },
@@ -136,7 +141,7 @@
         "precision": "locality",
         "evidence": "February 16 – February 23, 2027 | Montréal, Canada",
         "source_url": "https://aaai.org/conference/aaai/aaai-27/",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -146,28 +151,35 @@
       "series_url": "https://www.acmmm.org/",
       "year": 2027,
       "status": "awaiting_official_page",
-      "error": "search brave: HTTP 429; https://2027.acmmm.org/: page title or main heading does not identify the target edition",
+      "error": "search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; https://2027.acmmm.org/: page title or main heading does not identify the target edition",
       "discovered_from": null,
       "discovery_method": null,
-      "discovery_status": "unverified_candidates",
+      "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "partial",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ACM+MM+2027+official+conference",
-          "status": "ok",
-          "result_count": 2,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ACM MM 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ACM+MM+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ACM MM 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ACM+MM+2027+official+conference+%28site%3Awww.acmmm.org+OR+site%3Aacmmm.org%29",
-          "status": "irrelevant_results",
-          "result_count": 0,
+          "status": "blocked",
+          "error": "search provider requested human verification",
           "query": "ACM MM 2027 official conference (site:www.acmmm.org OR site:acmmm.org)"
         },
         {
@@ -178,18 +190,7 @@
           "query": "ACM MM 2027 official conference (site:www.acmmm.org OR site:acmmm.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://2027.acmmmsys.org/",
-          "discovered_from": "ACM MM 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://trybibby.com/conference-deadlines/acm-mm-2027",
-          "discovered_from": "ACM MM 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [],
       "provenance": [],
       "verified_at": null,
@@ -205,7 +206,7 @@
         "precision": "locality",
         "evidence": "ACM MM 2027 will be in Hong Kong. Dates to be announced.",
         "source_url": "https://www.acmmm.org/",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -215,28 +216,35 @@
       "series_url": "https://www.bmva.org/bmvc",
       "year": 2027,
       "status": "awaiting_official_page",
-      "error": "search brave: HTTP 429; https://bmvc2027.bmva.org/: DNS error: [Errno -2] Name or service not known",
+      "error": "search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; https://bmvc2027.bmva.org/: DNS error: [Errno -2] Name or service not known",
       "discovered_from": null,
       "discovery_method": null,
-      "discovery_status": "unverified_candidates",
+      "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "partial",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=BMVC+2027+official+conference",
-          "status": "ok",
-          "result_count": 2,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "BMVC 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=BMVC+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "BMVC 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=BMVC+2027+official+conference+%28site%3Awww.bmva.org+OR+site%3Abmva.org%29",
-          "status": "irrelevant_results",
-          "result_count": 0,
+          "status": "blocked",
+          "error": "search provider requested human verification",
           "query": "BMVC 2027 official conference (site:www.bmva.org OR site:bmva.org)"
         },
         {
@@ -247,18 +255,7 @@
           "query": "BMVC 2027 official conference (site:www.bmva.org OR site:bmva.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://mlciv.com/ai-deadlines/conference/?id=bmvc27",
-          "discovered_from": "BMVC 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "http://www.wikicfp.com/cfp/program?id=315",
-          "discovered_from": "BMVC 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [],
       "provenance": [],
       "verified_at": null,
@@ -276,28 +273,35 @@
       "series_url": "https://colm.cc/",
       "year": 2027,
       "status": "awaiting_official_page",
-      "error": "https://colm.cc/: previous edition bootstrap failed: edition link does not establish a conference homepage; search brave: HTTP 429; https://colm.cc/Conferences/2027: HTTP 404",
+      "error": "https://colm.cc/: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; https://colm.cc/Conferences/2027: HTTP 404",
       "discovered_from": null,
       "discovery_method": null,
-      "discovery_status": "unverified_candidates",
+      "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "partial",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=COLM+2027+official+conference",
-          "status": "ok",
-          "result_count": 5,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "COLM 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=COLM+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "COLM 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=COLM+2027+official+conference+%28site%3Acolm.cc+OR+site%3Acolmweb.org%29",
-          "status": "irrelevant_results",
-          "result_count": 0,
+          "status": "blocked",
+          "error": "search provider requested human verification",
           "query": "COLM 2027 official conference (site:colm.cc OR site:colmweb.org)"
         },
         {
@@ -308,33 +312,7 @@
           "query": "COLM 2027 official conference (site:colm.cc OR site:colmweb.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://mlciv.com/ai-deadlines/conference/?id=colm27",
-          "discovered_from": "COLM 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://trybibby.com/conference-deadlines/colm-2027",
-          "discovered_from": "COLM 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.conferencedeadlines.com/conference/colm",
-          "discovered_from": "COLM 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.conferencedeadlines.com/venue/colm",
-          "discovered_from": "COLM 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.beri.net/events/colm-2027",
-          "discovered_from": "COLM 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [],
       "provenance": [],
       "verified_at": null,
@@ -352,63 +330,51 @@
       "series_url": "https://cvpr.thecvf.com/",
       "year": 2027,
       "status": "verified",
-      "error": "https://cvpr.thecvf.com/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage; https://CVPR%202027%20Submission%20Template: DNS error: [Errno -2] Name or service not known",
+      "error": "https://cvpr.thecvf.com/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://cvpr.thecvf.com/",
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
-        "candidate_count": 2
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
+        "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=CVPR+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "CVPR 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=CVPR+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "CVPR 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=CVPR+2027+official+conference+%28site%3Acvpr.thecvf.com+OR+site%3Athecvf.com%29",
-          "status": "ok",
-          "result_count": 4,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "CVPR 2027 official conference (site:cvpr.thecvf.com OR site:thecvf.com)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=CVPR+2027+official+conference+%28site%3Acvpr.thecvf.com+OR+site%3Athecvf.com%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "CVPR 2027 official conference (site:cvpr.thecvf.com OR site:thecvf.com)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://www.computer.org/conferences/cfp-ieee-cvpr-2027",
-          "discovered_from": "CVPR 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://events.prompt20.com/events/cvpr-2027",
-          "discovered_from": "CVPR 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://semihub.io/en/conf/cvpr.html",
-          "discovered_from": "CVPR 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://aiworkshoptracker.com/conference/cvpr/2027/",
-          "discovered_from": "CVPR 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://CVPR%202027%20Submission%20Template",
-          "discovered_from": "https://cvpr.thecvf.com/Conferences/2027/AuthorGuidelines",
-          "reason": "DNS error: [Errno -2] Name or service not known"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://cvpr.thecvf.com/Conferences/2027",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://cvpr.thecvf.com/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -429,7 +395,7 @@
           "evidence": "2027"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {
         "deadline": "2026-11-16 23:59:59",
         "abstract_deadline": "2026-11-10 23:59:59"
@@ -444,7 +410,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://cvpr.thecvf.com/Conferences/2027/Dates",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -456,7 +422,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://cvpr.thecvf.com/Conferences/2027/Dates",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         }
       },
@@ -475,7 +441,7 @@
         "precision": "locality",
         "evidence": "Seattle WA",
         "source_url": "https://cvpr.thecvf.com/Conferences/2027",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -485,73 +451,46 @@
       "series_url": "https://www.eurai.org/ecai",
       "year": 2027,
       "status": "awaiting_official_page",
-      "error": "https://www.eurai.org/award/jerome-lang: network error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010); https://www.eurai.org/applications/ecai-chairs-2027: network error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010)",
+      "error": "https://www.eurai.org/award/jerome-lang: network error: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: certificate has expired (_ssl.c:1010); search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": null,
       "discovery_method": null,
-      "discovery_status": "unverified_candidates",
+      "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 0
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ECAI+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ECAI 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ECAI+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ECAI 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ECAI+2027+official+conference+%28site%3Awww.eurai.org+OR+site%3Aeurai.org%29",
-          "status": "ok",
-          "result_count": 1,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ECAI 2027 official conference (site:www.eurai.org OR site:eurai.org)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ECAI+2027+official+conference+%28site%3Awww.eurai.org+OR+site%3Aeurai.org%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ECAI 2027 official conference (site:www.eurai.org OR site:eurai.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://ecai2027.org/",
-          "discovered_from": "ECAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://ecai2027.org/program/schedule.html",
-          "discovered_from": "ECAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.beri.net/events/ecai-2027",
-          "discovered_from": "ECAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.opencurious.com/ai-conference-deadlines/ecai-2027",
-          "discovered_from": "ECAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://allai.events/event/ecai-2027",
-          "discovered_from": "ECAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://researchguru.ai/conferences/ecai/",
-          "discovered_from": "ECAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.publishjourney.com/conference-calls/ee2046e0-7e96-4f77-a4a1-2da796b711c5",
-          "discovered_from": "ECAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://conferences.clicvia.com/conference/ecai-2027/",
-          "discovered_from": "ECAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [],
       "provenance": [],
       "verified_at": null,
@@ -569,58 +508,46 @@
       "series_url": "https://eccv.ecva.net/",
       "year": 2028,
       "status": "awaiting_official_page",
-      "error": "https://eccv.ecva.net/: previous edition bootstrap failed: edition link does not establish a conference homepage; https://eccv.ecva.net/: page title or main heading does not identify the target edition",
+      "error": "https://eccv.ecva.net/: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; https://eccv.ecva.net/: page title or main heading does not identify the target edition",
       "discovered_from": null,
       "discovery_method": null,
-      "discovery_status": "unverified_candidates",
+      "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ECCV+2028+official+conference",
-          "status": "ok",
-          "result_count": 5,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ECCV 2028 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ECCV+2028+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ECCV 2028 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ECCV+2028+official+conference+%28site%3Aeccv.ecva.net+OR+site%3Aecva.net%29",
-          "status": "ok",
-          "result_count": 1,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ECCV 2028 official conference (site:eccv.ecva.net OR site:ecva.net)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ECCV+2028+official+conference+%28site%3Aeccv.ecva.net+OR+site%3Aecva.net%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ECCV 2028 official conference (site:eccv.ecva.net OR site:ecva.net)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://www.showsbee.com/fairs/101106-ECCV-Conference-2028.html",
-          "discovered_from": "ECCV 2028 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.clocate.com/european-conference-on-computer-vision-eccv/48742/",
-          "discovered_from": "ECCV 2028 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.ourglocal.com/wikicfp/?conid=16&year=2028",
-          "discovered_from": "ECCV 2028 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.alfredscholar.com/conferences/eccv-2028/",
-          "discovered_from": "ECCV 2028 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.beri.net/events/eccv-2028",
-          "discovered_from": "ECCV 2028 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [],
       "provenance": [],
       "verified_at": null,
@@ -638,28 +565,35 @@
       "series_url": "https://sigdat.org/",
       "year": 2027,
       "status": "awaiting_official_page",
-      "error": "search brave: HTTP 429; https://2027.emnlp.org/: DNS error: [Errno -2] Name or service not known",
+      "error": "search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; https://2027.emnlp.org/: DNS error: [Errno -2] Name or service not known",
       "discovered_from": null,
       "discovery_method": null,
-      "discovery_status": "unverified_candidates",
+      "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "partial",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=EMNLP+2027+official+conference",
-          "status": "ok",
-          "result_count": 6,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "EMNLP 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=EMNLP+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "EMNLP 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=EMNLP+2027+official+conference+%28site%3Asigdat.org+OR+site%3Aemnlp.org+OR+site%3Aaclweb.org%29",
-          "status": "irrelevant_results",
-          "result_count": 0,
+          "status": "blocked",
+          "error": "search provider requested human verification",
           "query": "EMNLP 2027 official conference (site:sigdat.org OR site:emnlp.org OR site:aclweb.org)"
         },
         {
@@ -670,38 +604,7 @@
           "query": "EMNLP 2027 official conference (site:sigdat.org OR site:emnlp.org OR site:aclweb.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://trybibby.com/nlp",
-          "discovered_from": "EMNLP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://trybibby.com/conference-deadlines/emnlp-2027",
-          "discovered_from": "EMNLP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://researchcompass.dev/conferences/emnlp-2027",
-          "discovered_from": "EMNLP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://mlciv.com/ai-deadlines/conference/?id=emnlp27",
-          "discovered_from": "EMNLP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.conferencedeadlines.com/conference/emnlp",
-          "discovered_from": "EMNLP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.conferencedeadlines.com/venue/emnlp",
-          "discovered_from": "EMNLP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [],
       "provenance": [],
       "verified_at": null,
@@ -719,58 +622,51 @@
       "series_url": "https://signalprocessingsociety.org/events/conferences",
       "year": 2027,
       "status": "verified",
-      "error": null,
+      "error": "search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://2027.ieeeicassp.org/",
       "discovery_method": "previous_edition_link",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICASSP+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICASSP 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICASSP+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICASSP 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICASSP+2027+official+conference+%28site%3Asignalprocessingsociety.org+OR+site%3A2027.ieeeicassp.org+OR+site%3Aieeeicassp.org%29",
-          "status": "ok",
-          "result_count": 5,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICASSP 2027 official conference (site:signalprocessingsociety.org OR site:2027.ieeeicassp.org OR site:ieeeicassp.org)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICASSP+2027+official+conference+%28site%3Asignalprocessingsociety.org+OR+site%3A2027.ieeeicassp.org+OR+site%3Aieeeicassp.org%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICASSP 2027 official conference (site:signalprocessingsociety.org OR site:2027.ieeeicassp.org OR site:ieeeicassp.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://www.confshub.com/conferences/icassp/2027",
-          "discovered_from": "ICASSP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://ntl.events/events/icassp-2027-2027-toronto-201211",
-          "discovered_from": "ICASSP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://conferenceindex.org/event/international-conference-on-acoustics-speech-and-signal-processing-icassp-2027-april-boston-us",
-          "discovered_from": "ICASSP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://conferenceinc.net/post/icassp-2027/",
-          "discovered_from": "ICASSP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://2027.ieeeicassp.org/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://2027.ieeeicassp.org/",
           "discovery_method": "previous_edition_link",
           "provenance": [
@@ -891,7 +787,7 @@
           "link_label": "2027 IEEE International Conference on Acoustics, Speech, and Signal Processing 2027 IEEE International Conference on Acoustics, Speech, and Signal Processing"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {
         "deadline": "2026-09-23 23:59:59"
       },
@@ -905,7 +801,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "registry",
           "source_url": "https://2027.ieeeicassp.org/call-for-papers/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         }
       },
@@ -925,7 +821,7 @@
         "precision": "locality",
         "evidence": "Venue: Visa Information",
         "source_url": "https://2027.ieeeicassp.org/",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -935,68 +831,51 @@
       "series_url": "https://iccv.thecvf.com/",
       "year": 2027,
       "status": "verified",
-      "error": "https://iccv.thecvf.com/Conferences/2025: previous edition bootstrap failed: edition link does not establish a conference homepage",
+      "error": "https://iccv.thecvf.com/Conferences/2025: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://iccv.thecvf.com/Conferences/2027",
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICCV+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICCV 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICCV+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICCV 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICCV+2027+official+conference+%28site%3Aiccv.thecvf.com+OR+site%3Athecvf.com%29",
-          "status": "ok",
-          "result_count": 3,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICCV 2027 official conference (site:iccv.thecvf.com OR site:thecvf.com)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICCV+2027+official+conference+%28site%3Aiccv.thecvf.com+OR+site%3Athecvf.com%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICCV 2027 official conference (site:iccv.thecvf.com OR site:thecvf.com)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://aiwhatson.com/event/iccv-2027-international-conference-on-computer-vision",
-          "discovered_from": "ICCV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://conferenceindex.org/event/international-conference-on-computer-vision-iccv-2027-april-nicosia-cy",
-          "discovered_from": "ICCV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.beri.net/events/iccv-2027",
-          "discovered_from": "ICCV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.opencurious.com/ai-conference-deadlines/iccv-2027",
-          "discovered_from": "ICCV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://conferenceindex.org/event/international-conference-on-computational-vision-iccv-2027-february-lisbon-pt",
-          "discovered_from": "ICCV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://convcast.com/event/iccv-2027/",
-          "discovered_from": "ICCV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://iccv.thecvf.com/Conferences/2027",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://iccv.thecvf.com/Conferences/2027",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1017,7 +896,7 @@
           "evidence": "Skip to yearly menu bar"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {},
       "deadline_evidence": {},
       "deadline_status": "not_detected",
@@ -1034,7 +913,7 @@
         "precision": "locality",
         "evidence": "Hong Kong Convention and Expo Center",
         "source_url": "https://iccv.thecvf.com/Conferences/2027",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -1044,58 +923,51 @@
       "series_url": "https://signalprocessingsociety.org/events/conferences",
       "year": 2027,
       "status": "verified",
-      "error": null,
+      "error": "search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://2027.ieeeicip.org/",
       "discovery_method": "previous_edition_link",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICIP+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICIP 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICIP+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICIP 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICIP+2027+official+conference+%28site%3Asignalprocessingsociety.org+OR+site%3A2027.ieeeicip.org+OR+site%3Aieeeicip.org%29",
-          "status": "ok",
-          "result_count": 6,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICIP 2027 official conference (site:signalprocessingsociety.org OR site:2027.ieeeicip.org OR site:ieeeicip.org)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICIP+2027+official+conference+%28site%3Asignalprocessingsociety.org+OR+site%3A2027.ieeeicip.org+OR+site%3Aieeeicip.org%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICIP 2027 official conference (site:signalprocessingsociety.org OR site:2027.ieeeicip.org OR site:ieeeicip.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://www.vit.edu/ICIP2027/",
-          "discovered_from": "ICIP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.beri.net/events/icip-2027",
-          "discovered_from": "ICIP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://researchguru.ai/conferences/icip/",
-          "discovered_from": "ICIP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.conferencelists.org/event/ieee-international-conference-on-image-processing-icip/",
-          "discovered_from": "ICIP 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://2027.ieeeicip.org/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://2027.ieeeicip.org/",
           "discovery_method": "previous_edition_link",
           "provenance": [
@@ -1216,7 +1088,7 @@
           "link_label": "2027 IEEE International Conference on Image Processing 2027 IEEE International Conference on Image Processing 2027 IEEE International Conference on Image Processing"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {},
       "deadline_evidence": {},
       "deadline_status": "not_detected",
@@ -1231,7 +1103,7 @@
         "precision": "locality",
         "evidence": "29 November – 3 December 2027, Singapore",
         "source_url": "https://2027.ieeeicip.org/",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -1241,58 +1113,51 @@
       "series_url": "https://iclr.cc/",
       "year": 2027,
       "status": "verified",
-      "error": "https://iclr.cc/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage",
+      "error": "https://iclr.cc/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://iclr.cc/Conferences/2027",
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICLR+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICLR 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICLR+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICLR 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICLR+2027+official+conference+%28site%3Aiclr.cc%29",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICLR 2027 official conference (site:iclr.cc)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICLR+2027+official+conference+%28site%3Aiclr.cc%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICLR 2027 official conference (site:iclr.cc)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://www.opencurious.com/ai-conference-deadlines/iclr-2027",
-          "discovered_from": "ICLR 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://events.prompt20.com/events/iclr-2027",
-          "discovered_from": "ICLR 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://aiwhatson.com/event/iclr-2027",
-          "discovered_from": "ICLR 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://aiworkshoptracker.com/conference/iclr/2027/",
-          "discovered_from": "ICLR 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://iclr.cc/Conferences/2027",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://iclr.cc/Conferences/2027",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1315,7 +1180,7 @@
           "link_label": "Skip to yearly menu bar"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {
         "deadline": "2026-09-25 23:59:59",
         "abstract_deadline": "2026-09-18 23:59:59"
@@ -1330,7 +1195,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://iclr.cc/Conferences/2027/Dates",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -1342,16 +1207,15 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://iclr.cc/Conferences/2027/Dates",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         }
       },
       "deadline_status": "verified",
       "deadline_pages": [
-        "https://iclr.cc/accounts/login?nextp=/Conferences/2027/Dates",
         "https://iclr.cc/Conferences/2027/Dates",
         "https://iclr.cc/Conferences/2027/CallForPapers",
-        "https://iclr.cc/accounts/login_by_email?nextp=/Conferences/2027/Dates",
+        "https://iclr.cc/set_timezone?nextp=/Conferences/2027/Dates",
         "https://iclr.cc/Conferences/2027"
       ],
       "timezone": "UTC-12",
@@ -1362,7 +1226,7 @@
         "precision": "locality",
         "evidence": "California",
         "source_url": "https://iclr.cc/Conferences/2027",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -1372,53 +1236,51 @@
       "series_url": "https://signalprocessingsociety.org/events/conferences",
       "year": 2027,
       "status": "verified",
-      "error": null,
+      "error": "search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://signalprocessingsociety.org/events/conferences",
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICME+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICME 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICME+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICME 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICME+2027+official+conference+%28site%3Asignalprocessingsociety.org+OR+site%3A2027.ieeeicme.org+OR+site%3Aieeeicme.org%29",
-          "status": "ok",
-          "result_count": 7,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICME 2027 official conference (site:signalprocessingsociety.org OR site:2027.ieeeicme.org OR site:ieeeicme.org)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICME+2027+official+conference+%28site%3Asignalprocessingsociety.org+OR+site%3A2027.ieeeicme.org+OR+site%3Aieeeicme.org%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICME 2027 official conference (site:signalprocessingsociety.org OR site:2027.ieeeicme.org OR site:ieeeicme.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://www.beri.net/events/ieee-icme-2027",
-          "discovered_from": "ICME 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.tms.org/SpecialtyCongress2027/SpecialtyCongress2027/ICME2027/default.aspx",
-          "discovered_from": "ICME 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://journalsworld.com/conference/2027-ieee-international-conference-on-multimedia-and-expo-icme-2027/",
-          "discovered_from": "ICME 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://2027.ieeeicme.org/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://signalprocessingsociety.org/events/conferences",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1437,7 +1299,7 @@
           "target_url": "https://2027.ieeeicme.org/"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {
         "deadline": "2026-11-27 11:59:00"
       },
@@ -1451,7 +1313,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://2027.ieeeicme.org/about/important-dates",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         }
       },
@@ -1471,7 +1333,7 @@
         "precision": "locality",
         "evidence": "Venue: The location of the conference",
         "source_url": "https://2027.ieeeicme.org/",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -1481,63 +1343,51 @@
       "series_url": "https://icml.cc/",
       "year": 2027,
       "status": "verified",
-      "error": "https://icml.cc/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage",
+      "error": "https://icml.cc/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://icml.cc/",
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICML+2027+official+conference",
-          "status": "ok",
-          "result_count": 7,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICML 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICML+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICML 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=ICML+2027+official+conference+%28site%3Aicml.cc%29",
-          "status": "ok",
-          "result_count": 1,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "ICML 2027 official conference (site:icml.cc)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=ICML+2027+official+conference+%28site%3Aicml.cc%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "ICML 2027 official conference (site:icml.cc)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://icml2027.eurac.edu/en",
-          "discovered_from": "ICML 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.opencurious.com/ai-conference-deadlines/icml-2027",
-          "discovered_from": "ICML 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://ior.usi.ch/events-news/19th-international-conference-on-malignant-lymphom-40457",
-          "discovered_from": "ICML 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://researchtheta.com/conferences/icml-2027/",
-          "discovered_from": "ICML 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://icml2027.eurac.edu/en/news/official-conference-themes-confirmed-for-icml-2027",
-          "discovered_from": "ICML 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://icml.cc/Conferences/2027",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://icml.cc/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1556,7 +1406,7 @@
           "target_url": "https://icml.cc/Conferences/2027"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {},
       "deadline_evidence": {},
       "deadline_status": "not_detected",
@@ -1574,7 +1424,7 @@
         "precision": "region",
         "evidence": "2027 -- Rio de Janeiro, Brazil",
         "source_url": "https://icml.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -1584,68 +1434,51 @@
       "series_url": "https://www.ijcai.org/",
       "year": 2027,
       "status": "verified",
-      "error": "https://ijcai.org/awards/: previous edition bootstrap failed: edition link does not establish a conference homepage",
+      "error": "https://ijcai.org/awards/: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://www.ijcai.org/",
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=IJCAI+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "IJCAI 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=IJCAI+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "IJCAI 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=IJCAI+2027+official+conference+%28site%3Awww.ijcai.org+OR+site%3A2027.ijcai.org+OR+site%3Aijcai.org%29",
-          "status": "ok",
-          "result_count": 6,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "IJCAI 2027 official conference (site:www.ijcai.org OR site:2027.ijcai.org OR site:ijcai.org)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=IJCAI+2027+official+conference+%28site%3Awww.ijcai.org+OR+site%3A2027.ijcai.org+OR+site%3Aijcai.org%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "IJCAI 2027 official conference (site:www.ijcai.org OR site:2027.ijcai.org OR site:ijcai.org)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://gradwiser.com/conferences/ijcai/2027",
-          "discovered_from": "IJCAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://world-wide.org/conference/ijcai-2027",
-          "discovered_from": "IJCAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.beri.net/events/ijcai-2027",
-          "discovered_from": "IJCAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "http://www.wikicfp.com/cfp/servlet/event.showcfp?eventid=203943",
-          "discovered_from": "IJCAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.opencurious.com/ai-conference-deadlines/ijcai-2027",
-          "discovered_from": "IJCAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://sai.cuhk.edu.cn/en/event/353",
-          "discovered_from": "IJCAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://2027.ijcai.org/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://www.ijcai.org/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1664,7 +1497,7 @@
           "target_url": "https://2027.ijcai.org/"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {
         "deadline": "2027-01-11 23:59:59",
         "abstract_deadline": "2027-01-04 23:59:59"
@@ -1679,7 +1512,7 @@
           "source_timezone": "AoE",
           "timezone_source": "page",
           "source_url": "https://2027.ijcai.org/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -1691,7 +1524,7 @@
           "source_timezone": "AoE",
           "timezone_source": "page",
           "source_url": "https://2027.ijcai.org/",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         }
       },
@@ -1708,7 +1541,7 @@
         "precision": "locality",
         "evidence": "IJCAI-27 will be held from August 7th until August 13, 2027 in Kyoto, Japan and from August 15th until August 17, 2027 in Hengqin, China. We are looking forward to welcoming you there.",
         "source_url": "https://ijcai.org/",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -1718,28 +1551,35 @@
       "series_url": "https://neurips.cc/",
       "year": 2027,
       "status": "awaiting_official_page",
-      "error": "https://neurips.cc/: previous edition bootstrap failed: edition link does not establish a conference homepage; search brave: HTTP 429; https://neurips.cc/Conferences/2027: HTTP 404",
+      "error": "https://neurips.cc/: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; https://neurips.cc/Conferences/2027: HTTP 404",
       "discovered_from": null,
       "discovery_method": null,
-      "discovery_status": "unverified_candidates",
+      "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "partial",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=NeurIPS+2027+official+conference",
-          "status": "ok",
-          "result_count": 5,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "NeurIPS 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=NeurIPS+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "NeurIPS 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=NeurIPS+2027+official+conference+%28site%3Aneurips.cc%29",
-          "status": "irrelevant_results",
-          "result_count": 0,
+          "status": "blocked",
+          "error": "search provider requested human verification",
           "query": "NeurIPS 2027 official conference (site:neurips.cc)"
         },
         {
@@ -1750,33 +1590,7 @@
           "query": "NeurIPS 2027 official conference (site:neurips.cc)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://researchtheta.com/conferences/neurips-2027/",
-          "discovered_from": "NeurIPS 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.opencurious.com/ai-conference-deadlines/neurips-2027",
-          "discovered_from": "NeurIPS 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.opencurious.com/ai-conference-deadlines",
-          "discovered_from": "NeurIPS 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://yingjinghuang.github.io/geo-deadlines/opportunity/neurips-2027/",
-          "discovered_from": "NeurIPS 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.openresearch.org/wiki/NeurIPS_2027",
-          "discovered_from": "NeurIPS 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [],
       "provenance": [],
       "verified_at": null,
@@ -1792,7 +1606,7 @@
         "precision": "region",
         "evidence": "2027 -- Europe",
         "source_url": "https://neurips.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     },
@@ -1802,68 +1616,51 @@
       "series_url": "https://wacv.thecvf.com/",
       "year": 2027,
       "status": "verified",
-      "error": "https://wacv.thecvf.com/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage",
+      "error": "https://wacv.thecvf.com/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://wacv.thecvf.com/",
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-04T01:26:37.287215+00:00",
-        "search_status": "completed",
+        "checked_at": "2026-11-05T01:29:37.653266+00:00",
+        "search_status": "unavailable",
         "candidate_count": 1
       },
       "search_attempts": [
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=WACV+2027+official+conference",
-          "status": "ok",
-          "result_count": 8,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "WACV 2027 official conference"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=WACV+2027+official+conference&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "WACV 2027 official conference"
         },
         {
           "provider": "duckduckgo_lite",
           "url": "https://lite.duckduckgo.com/lite/?q=WACV+2027+official+conference+%28site%3Awacv.thecvf.com+OR+site%3Athecvf.com%29",
-          "status": "ok",
-          "result_count": 5,
+          "status": "blocked",
+          "error": "search provider requested human verification",
+          "query": "WACV 2027 official conference (site:wacv.thecvf.com OR site:thecvf.com)"
+        },
+        {
+          "provider": "brave",
+          "url": "https://search.brave.com/search?q=WACV+2027+official+conference+%28site%3Awacv.thecvf.com+OR+site%3Athecvf.com%29&source=web",
+          "status": "error",
+          "error": "HTTP 429",
           "query": "WACV 2027 official conference (site:wacv.thecvf.com OR site:thecvf.com)"
         }
       ],
-      "unverified_candidates": [
-        {
-          "url": "https://www.beri.net/events/wacv-2027",
-          "discovered_from": "WACV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://aiconferencefinder.com/conferences/wacv/",
-          "discovered_from": "WACV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://wysera.ai/ai-events/wacv-2027",
-          "discovered_from": "WACV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://researchguru.ai/conferences/wacv/",
-          "discovered_from": "WACV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://www.computer.org/conferences/cfp-ieee-cvf-wacv",
-          "discovered_from": "WACV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://aiwhatson.com/event/wacv-2027-orlando",
-          "discovered_from": "WACV 2027 official conference",
-          "reason": "search result has no verified official-source reference"
-        }
-      ],
+      "unverified_candidates": [],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://wacv.thecvf.com/Conferences/2027",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "discovered_from": "https://wacv.thecvf.com/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1890,7 +1687,7 @@
           "target_url": "https://wacv.thecvf.com/Conferences/2027"
         }
       ],
-      "verified_at": "2026-11-04T01:26:37.287215+00:00",
+      "verified_at": "2026-11-05T01:29:37.653266+00:00",
       "deadlines": {
         "deadline": "2026-08-28 23:59:59",
         "abstract_deadline": "2026-08-21 23:59:59"
@@ -1905,7 +1702,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://wacv.thecvf.com/Conferences/2027/Dates",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -1917,16 +1714,16 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://wacv.thecvf.com/Conferences/2027/Dates",
-          "verified_at": "2026-11-04T01:26:37.287215+00:00",
+          "verified_at": "2026-11-05T01:29:37.653266+00:00",
           "status": "verified"
         }
       },
       "deadline_status": "verified",
       "deadline_pages": [
+        "https://wacv.thecvf.com/accounts/login?nextp=/Conferences/2027/Dates",
         "https://wacv.thecvf.com/Conferences/2027/Dates",
         "https://wacv.thecvf.com/Conferences/2027/CallForPapers",
-        "https://wacv.thecvf.com/set_timezone?nextp=/Conferences/2027/Dates",
-        "https://wacv.thecvf.com/Conferences/2027/Pricing2",
+        "https://wacv.thecvf.com/accounts/login_by_email?nextp=/Conferences/2027/Dates",
         "https://wacv.thecvf.com/Conferences/2027"
       ],
       "timezone": "UTC-12",
@@ -1937,7 +1734,7 @@
         "precision": "locality",
         "evidence": "Disney Springs, Buena Vista, FL | Monday, Jan 4 through Friday, Jan 8, 2027",
         "source_url": "https://wacv.thecvf.com/Conferences/2027",
-        "verified_at": "2026-11-04T01:26:37.287215+00:00"
+        "verified_at": "2026-11-05T01:29:37.653266+00:00"
       },
       "pending_location": null
     }
