@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-11-09T00:57:45.652904+00:00",
+  "updated_at": "2026-11-10T03:37:06.522115+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
