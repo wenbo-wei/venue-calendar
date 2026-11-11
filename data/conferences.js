@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-11-10T03:37:06.522115+00:00",
+  "updated_at": "2026-11-11T01:16:52.667037+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -23,7 +23,7 @@ window.AI_CONFERENCES = {
             }
           ],
           "timezone": "UTC-12",
-          "deadline_source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
+          "deadline_source_url": "https://aaai.org/conference/aaai/aaai-27/",
           "deadline_status": "verified",
           "date": "TBD",
           "place": "Montréal, Canada",
@@ -48,10 +48,10 @@ window.AI_CONFERENCES = {
         {
           "year": 2027,
           "id": "mm27",
-          "link": "https://www.acmmm.org/",
-          "link_kind": "series",
-          "official_page_announced": false,
-          "discovery_status": "search_unavailable",
+          "link": "https://2027.acmmm.org/",
+          "link_kind": "edition",
+          "official_page_announced": true,
+          "discovery_status": "verified",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
@@ -62,8 +62,8 @@ window.AI_CONFERENCES = {
           "location_source_url": "https://www.acmmm.org/"
         }
       ],
-      "latest_link": "https://www.acmmm.org/",
-      "official_url": null,
+      "latest_link": "https://2027.acmmm.org/",
+      "official_url": "https://2027.acmmm.org/",
       "series_url": "https://www.acmmm.org/",
       "next_year": 2027,
       "source_category": "official",
