@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-11-11T01:16:52.667037+00:00",
+  "updated_at": "2026-11-12T02:17:42.811690+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -23,7 +23,7 @@ window.AI_CONFERENCES = {
             }
           ],
           "timezone": "UTC-12",
-          "deadline_source_url": "https://aaai.org/conference/aaai/aaai-27/",
+          "deadline_source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
           "deadline_status": "verified",
           "date": "TBD",
           "place": "Montréal, Canada",
@@ -57,9 +57,9 @@ window.AI_CONFERENCES = {
           "deadline_source_url": null,
           "deadline_status": "not_detected",
           "date": "TBD",
-          "place": "Hong Kong",
+          "place": "Hong Kong Time (UTC+8)",
           "place_status": "verified",
-          "location_source_url": "https://www.acmmm.org/"
+          "location_source_url": "https://2027.acmmm.org/"
         }
       ],
       "latest_link": "https://2027.acmmm.org/",
@@ -442,10 +442,15 @@ window.AI_CONFERENCES = {
           "link_kind": "edition",
           "official_page_announced": true,
           "discovery_status": "verified",
-          "timeline": [],
+          "timeline": [
+            {
+              "deadline": "2027-01-22 23:59:59",
+              "abstract_deadline": "2027-01-14 23:59:59"
+            }
+          ],
           "timezone": "UTC-12",
-          "deadline_source_url": null,
-          "deadline_status": "not_detected",
+          "deadline_source_url": "https://icml.cc/Conferences/2027/Dates",
+          "deadline_status": "verified",
           "date": "TBD",
           "place": "Rio de Janeiro, Brazil",
           "place_status": "verified",
