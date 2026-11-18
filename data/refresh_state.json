@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-17T03:57:27.642332+00:00",
+  "checked_at": "2026-11-18T02:56:07.227796+00:00",
   "changed": false,
   "venues": {
     "aaai": {
@@ -13,7 +13,7 @@
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "partial",
         "candidate_count": 1
       },
@@ -42,7 +42,12 @@
       ],
       "unverified_candidates": [
         {
-          "url": "https://aaaai2027.org/registration/",
+          "url": "https://aaaai2027.org/",
+          "discovered_from": "AAAI 2027 official conference",
+          "reason": "search result has no verified official-source reference"
+        },
+        {
+          "url": "https://casrai.org/guides/aaai",
           "discovered_from": "AAAI 2027 official conference",
           "reason": "search result has no verified official-source reference"
         },
@@ -60,18 +65,13 @@
           "url": "https://aaai.getregistered.net/aaai-conference-2027",
           "discovered_from": "AAAI 2027 official conference",
           "reason": "search result has no verified official-source reference"
-        },
-        {
-          "url": "https://aiwhatson.com/event/aaai-2027-aaai-conference-on-artificial-intelligence",
-          "discovered_from": "AAAI 2027 official conference",
-          "reason": "search result has no verified official-source reference"
         }
       ],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://aaai.org/conference/aaai/aaai-27/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://aaai.org/conference/aaai/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -92,7 +92,7 @@
           "evidence": "Forty-first Conference on Artificial Intelligence"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {
         "deadline": "2026-07-28 23:59:00",
         "abstract_deadline": "2026-07-21 23:59:00"
@@ -107,7 +107,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -119,7 +119,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://aaai.org/conference/aaai/aaai-27/main-technical-track-call/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         }
       },
@@ -136,7 +136,7 @@
         "precision": "locality",
         "evidence": "February 16 – February 23, 2027 | Montréal, Canada",
         "source_url": "https://aaai.org/conference/aaai/aaai-27/",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -151,7 +151,7 @@
       "discovery_method": "previous_edition_link",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "partial",
         "candidate_count": 1
       },
@@ -199,7 +199,7 @@
         {
           "year": 2027,
           "official_url": "https://2027.acmmm.org/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://2027.acmmm.org/",
           "discovery_method": "previous_edition_link",
           "provenance": [
@@ -207,6 +207,13 @@
               "url": "https://www.acmmm.org/",
               "method": "configured_pattern",
               "target_url": "https://2027.acmmm.org/"
+            },
+            {
+              "url": "https://2027.acmmm.org/",
+              "method": "previous_edition_link",
+              "target_url": "https://2027.acmmm.org/",
+              "evidence": "ACM Multimedia 2027, Hong Kong SAR, China",
+              "link_label": "ACM Multimedia 2027, Hong Kong SAR, China"
             },
             {
               "url": "https://2027.acmmm.org/",
@@ -300,9 +307,16 @@
           "target_url": "https://2027.acmmm.org/",
           "evidence": "ACM Multimedia 2027, Hong Kong SAR, China",
           "link_label": "ACM Multimedia 2027, Hong Kong SAR, China"
+        },
+        {
+          "url": "https://2027.acmmm.org/",
+          "method": "previous_edition_link",
+          "target_url": "https://2027.acmmm.org/",
+          "evidence": "ACM Multimedia 2027, Hong Kong SAR, China",
+          "link_label": "ACM Multimedia 2027, Hong Kong SAR, China"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {},
       "deadline_evidence": {},
       "deadline_status": "not_detected",
@@ -317,7 +331,7 @@
         "precision": "locality",
         "evidence": "Counting down to the opening day, 8 November 2027, Hong Kong Time (UTC+8)",
         "source_url": "https://2027.acmmm.org/",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -332,7 +346,7 @@
       "discovery_method": null,
       "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -389,7 +403,7 @@
       "discovery_method": null,
       "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -441,14 +455,14 @@
       "series_url": "https://cvpr.thecvf.com/",
       "year": 2027,
       "status": "verified",
-      "error": "https://cvpr.thecvf.com/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
+      "error": "https://cvpr.thecvf.com/Conferences/2026: previous edition bootstrap failed: edition link does not establish a conference homepage; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; https://CVPR%202027%20Submission%20Template: DNS error: [Errno -2] Name or service not known",
       "discovered_from": "https://cvpr.thecvf.com/",
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
-        "candidate_count": 1
+        "candidate_count": 2
       },
       "search_attempts": [
         {
@@ -480,12 +494,18 @@
           "query": "CVPR 2027 official conference (site:cvpr.thecvf.com OR site:thecvf.com)"
         }
       ],
-      "unverified_candidates": [],
+      "unverified_candidates": [
+        {
+          "url": "https://CVPR%202027%20Submission%20Template",
+          "discovered_from": "https://cvpr.thecvf.com/Conferences/2027/AuthorGuidelines",
+          "reason": "DNS error: [Errno -2] Name or service not known"
+        }
+      ],
       "official_history": [
         {
           "year": 2027,
           "official_url": "https://cvpr.thecvf.com/Conferences/2027",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://cvpr.thecvf.com/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -506,7 +526,7 @@
           "evidence": "2027"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {
         "deadline": "2026-11-16 23:59:59",
         "abstract_deadline": "2026-11-10 23:59:59"
@@ -521,7 +541,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://cvpr.thecvf.com/Conferences/2027/Dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -533,7 +553,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://cvpr.thecvf.com/Conferences/2027/Dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         }
       },
@@ -552,7 +572,7 @@
         "precision": "locality",
         "evidence": "Seattle WA",
         "source_url": "https://cvpr.thecvf.com/Conferences/2027",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -567,7 +587,7 @@
       "discovery_method": null,
       "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 0
       },
@@ -624,7 +644,7 @@
       "discovery_method": null,
       "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -681,7 +701,7 @@
       "discovery_method": null,
       "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -733,12 +753,12 @@
       "series_url": "https://signalprocessingsociety.org/events/conferences",
       "year": 2027,
       "status": "verified",
-      "error": "search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
+      "error": "https://signalprocessingsociety.org/our-story/news-updates/open-calls: The read operation timed out; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429; search duckduckgo_lite: search provider requested human verification; search brave: HTTP 429",
       "discovered_from": "https://2027.ieeeicassp.org/",
       "discovery_method": "previous_edition_link",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -777,7 +797,7 @@
         {
           "year": 2027,
           "official_url": "https://2027.ieeeicassp.org/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://2027.ieeeicassp.org/",
           "discovery_method": "previous_edition_link",
           "provenance": [
@@ -898,7 +918,7 @@
           "link_label": "2027 IEEE International Conference on Acoustics, Speech, and Signal Processing 2027 IEEE International Conference on Acoustics, Speech, and Signal Processing"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {
         "deadline": "2026-09-23 23:59:59"
       },
@@ -912,7 +932,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "registry",
           "source_url": "https://2027.ieeeicassp.org/call-for-papers/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         }
       },
@@ -932,7 +952,7 @@
         "precision": "locality",
         "evidence": "Venue: Visa Information",
         "source_url": "https://2027.ieeeicassp.org/",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -947,7 +967,7 @@
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -986,7 +1006,7 @@
         {
           "year": 2027,
           "official_url": "https://iccv.thecvf.com/Conferences/2027",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://iccv.thecvf.com/Conferences/2027",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1007,7 +1027,7 @@
           "evidence": "Skip to yearly menu bar"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {},
       "deadline_evidence": {},
       "deadline_status": "not_detected",
@@ -1024,7 +1044,7 @@
         "precision": "locality",
         "evidence": "Hong Kong Convention and Expo Center",
         "source_url": "https://iccv.thecvf.com/Conferences/2027",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -1039,7 +1059,7 @@
       "discovery_method": "previous_edition_link",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -1078,7 +1098,7 @@
         {
           "year": 2027,
           "official_url": "https://2027.ieeeicip.org/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://2027.ieeeicip.org/",
           "discovery_method": "previous_edition_link",
           "provenance": [
@@ -1199,7 +1219,7 @@
           "link_label": "2027 IEEE International Conference on Image Processing 2027 IEEE International Conference on Image Processing 2027 IEEE International Conference on Image Processing"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {},
       "deadline_evidence": {},
       "deadline_status": "not_detected",
@@ -1215,7 +1235,7 @@
         "precision": "locality",
         "evidence": "29 November – 3 December 2027, Singapore",
         "source_url": "https://2027.ieeeicip.org/",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -1230,7 +1250,7 @@
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -1269,7 +1289,7 @@
         {
           "year": 2027,
           "official_url": "https://iclr.cc/Conferences/2027",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://iclr.cc/Conferences/2027",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1292,7 +1312,7 @@
           "link_label": "Skip to yearly menu bar"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {
         "deadline": "2026-09-25 23:59:59",
         "abstract_deadline": "2026-09-18 23:59:59"
@@ -1307,7 +1327,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://iclr.cc/Conferences/2027/Dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -1319,7 +1339,7 @@
           "source_timezone": "UTC",
           "timezone_source": "page",
           "source_url": "https://iclr.cc/Conferences/2027/Dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         }
       },
@@ -1338,7 +1358,7 @@
         "precision": "locality",
         "evidence": "California",
         "source_url": "https://iclr.cc/Conferences/2027",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -1353,7 +1373,7 @@
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -1392,7 +1412,7 @@
         {
           "year": 2027,
           "official_url": "https://2027.ieeeicme.org/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://signalprocessingsociety.org/events/conferences",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1411,7 +1431,7 @@
           "target_url": "https://2027.ieeeicme.org/"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {
         "deadline": "2026-11-27 11:59:00"
       },
@@ -1425,7 +1445,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://2027.ieeeicme.org/about/important-dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         }
       },
@@ -1445,7 +1465,7 @@
         "precision": "locality",
         "evidence": "Venue: The location of the conference",
         "source_url": "https://2027.ieeeicme.org/",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -1460,7 +1480,7 @@
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -1499,7 +1519,7 @@
         {
           "year": 2027,
           "official_url": "https://icml.cc/Conferences/2027",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://icml.cc/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1518,7 +1538,7 @@
           "target_url": "https://icml.cc/Conferences/2027"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {
         "deadline": "2027-01-22 23:59:59",
         "abstract_deadline": "2027-01-14 23:59:59"
@@ -1533,7 +1553,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://icml.cc/Conferences/2027/Dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -1545,7 +1565,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://icml.cc/Conferences/2027/Dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         }
       },
@@ -1564,7 +1584,7 @@
         "precision": "region",
         "evidence": "2027 -- Rio de Janeiro, Brazil",
         "source_url": "https://icml.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -1579,7 +1599,7 @@
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -1618,7 +1638,7 @@
         {
           "year": 2027,
           "official_url": "https://2027.ijcai.org/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://www.ijcai.org/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1637,7 +1657,7 @@
           "target_url": "https://2027.ijcai.org/"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {
         "deadline": "2027-01-11 23:59:59",
         "abstract_deadline": "2027-01-04 23:59:59"
@@ -1652,7 +1672,7 @@
           "source_timezone": "AoE",
           "timezone_source": "page",
           "source_url": "https://2027.ijcai.org/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -1664,7 +1684,7 @@
           "source_timezone": "AoE",
           "timezone_source": "page",
           "source_url": "https://2027.ijcai.org/",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         }
       },
@@ -1681,7 +1701,7 @@
         "precision": "locality",
         "evidence": "IJCAI-27 will be held from August 7th until August 13, 2027 in Kyoto, Japan and from August 15th until August 17, 2027 in Hengqin, China. We are looking forward to welcoming you there.",
         "source_url": "https://ijcai.org/",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -1696,7 +1716,7 @@
       "discovery_method": null,
       "discovery_status": "search_unavailable",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -1746,7 +1766,7 @@
         "precision": "region",
         "evidence": "2027 -- Europe",
         "source_url": "https://neurips.cc/Conferences/FutureMeetings",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     },
@@ -1761,7 +1781,7 @@
       "discovery_method": "last_verified",
       "discovery_status": "verified",
       "discovery_details": {
-        "checked_at": "2026-11-17T03:57:27.642332+00:00",
+        "checked_at": "2026-11-18T02:56:07.227796+00:00",
         "search_status": "unavailable",
         "candidate_count": 1
       },
@@ -1800,7 +1820,7 @@
         {
           "year": 2027,
           "official_url": "https://wacv.thecvf.com/Conferences/2027",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "discovered_from": "https://wacv.thecvf.com/",
           "discovery_method": "last_verified",
           "provenance": [
@@ -1827,7 +1847,7 @@
           "target_url": "https://wacv.thecvf.com/Conferences/2027"
         }
       ],
-      "verified_at": "2026-11-17T03:57:27.642332+00:00",
+      "verified_at": "2026-11-18T02:56:07.227796+00:00",
       "deadlines": {
         "deadline": "2026-08-28 23:59:59",
         "abstract_deadline": "2026-08-21 23:59:59"
@@ -1842,7 +1862,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://wacv.thecvf.com/Conferences/2027/Dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         },
         "abstract_deadline": {
@@ -1854,7 +1874,7 @@
           "source_timezone": "UTC-12",
           "timezone_source": "page",
           "source_url": "https://wacv.thecvf.com/Conferences/2027/Dates",
-          "verified_at": "2026-11-17T03:57:27.642332+00:00",
+          "verified_at": "2026-11-18T02:56:07.227796+00:00",
           "status": "verified"
         }
       },
@@ -1874,7 +1894,7 @@
         "precision": "locality",
         "evidence": "Disney Springs, Buena Vista, FL | Monday, Jan 4 through Friday, Jan 8, 2027",
         "source_url": "https://wacv.thecvf.com/Conferences/2027",
-        "verified_at": "2026-11-17T03:57:27.642332+00:00"
+        "verified_at": "2026-11-18T02:56:07.227796+00:00"
       },
       "pending_location": null
     }
