@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-11-22T01:23:45.704339+00:00",
+  "updated_at": "2026-11-23T01:47:33.494521+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -82,7 +82,7 @@ window.AI_CONFERENCES = {
           "link": "https://www.bmva.org/bmvc",
           "link_kind": "series",
           "official_page_announced": false,
-          "discovery_status": "search_unavailable",
+          "discovery_status": "unverified_candidates",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
