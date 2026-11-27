@@ -1,5 +1,5 @@
 window.AI_CONFERENCES = {
-  "updated_at": "2026-11-26T03:37:15.557828+00:00",
+  "updated_at": "2026-11-27T03:39:36.773983+00:00",
   "upstream": "verified official conference websites",
   "venues": [
     {
@@ -51,7 +51,7 @@ window.AI_CONFERENCES = {
           "link": "https://2027.acmmm.org/",
           "link_kind": "edition",
           "official_page_announced": true,
-          "discovery_status": "verified",
+          "discovery_status": "retained",
           "timeline": [],
           "timezone": "UTC-12",
           "deadline_source_url": null,
